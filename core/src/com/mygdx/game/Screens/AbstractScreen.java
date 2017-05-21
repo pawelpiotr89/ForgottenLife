@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.mygdx.game.ForgottenName;
+import com.mygdx.game.ForgottenLife;
 
 /**
  * Created by Roxven89 on 21.05.2017.
@@ -15,23 +15,23 @@ import com.mygdx.game.ForgottenName;
 
 public abstract class AbstractScreen implements Screen {
 
-    protected ForgottenName game;
+    protected ForgottenLife game;
 
     protected Stage stage;
     private OrthographicCamera camera;
     protected SpriteBatch spriteBatch;
 
-    public AbstractScreen(ForgottenName game){
+    public AbstractScreen(ForgottenLife game){
         this.game = game;
         createCamera();
-        stage = new Stage(new StretchViewport(ForgottenName.WIDTH, ForgottenName.HEIGHT, camera));
+        stage = new Stage(new StretchViewport(ForgottenLife.WIDTH, ForgottenLife.HEIGHT, camera));
         spriteBatch = new SpriteBatch();
         Gdx.input.setInputProcessor(stage);
     }
 
     private void createCamera() {
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, ForgottenName.WIDTH, ForgottenName.HEIGHT);
+        camera.setToOrtho(false, ForgottenLife.WIDTH, ForgottenLife.HEIGHT);
         camera.update();
     }
 

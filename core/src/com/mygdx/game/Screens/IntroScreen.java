@@ -1,7 +1,7 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.ForgottenName;
+import com.mygdx.game.ForgottenLife;
 
 /**
  * Created by Roxven89 on 21.05.2017.
@@ -11,7 +11,7 @@ public class IntroScreen extends AbstractScreen{
 
     private Texture splashImg;
 
-    public IntroScreen(ForgottenName game) {
+    public IntroScreen(ForgottenLife game) {
         super(game);
         init();
     }

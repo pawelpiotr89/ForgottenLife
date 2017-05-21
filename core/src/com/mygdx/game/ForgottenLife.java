@@ -3,7 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Game;
 import com.mygdx.game.Screens.IntroScreen;
 
-public class ForgottenName extends Game {
+public class ForgottenLife extends Game {
 
 	public final static String GAME_NAME = "Forgotten Name";
 
