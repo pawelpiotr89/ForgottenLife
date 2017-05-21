@@ -17,7 +17,7 @@ public class IntroScreen extends AbstractScreen{
 
     private static final float FADE_IN_TIME = 1f;
     private static final float SUBTITLE_FADE_DELAY = 0.5f;
-    private static final float MOST_SUBTITLE_FADE_DELAY = 1f;
+    private static final float MORE_SUBTITLE_FADE_DELAY = 1f;
     private float fadeElapsed = 0;
 
     public IntroScreen(ForgottenLife game) {
@@ -36,12 +36,12 @@ public class IntroScreen extends AbstractScreen{
     }
 
     private void drawingText() {
-        drawingCompany();
+        drawingCompanyName();
         drawingPresents();
         drawingGameName();
     }
 
-    private void drawingCompany() {
+    private void drawingCompanyName() {
         float fade = Interpolation.fade.apply(fadeElapsed / FADE_IN_TIME);
         wordArt.setColor(1, 1, 1, fade);
         wordArt.draw(spriteBatch, nameOfCompany, game.WIDTH / 2.15f, game.HEIGHT / 1.6f);
@@ -55,7 +55,7 @@ public class IntroScreen extends AbstractScreen{
     }
 
     private void drawingGameName() {
-        float fade3 = Interpolation.fade.apply((fadeElapsed - MOST_SUBTITLE_FADE_DELAY) / SUBTITLE_FADE_DELAY);
+        float fade3 = Interpolation.fade.apply((fadeElapsed - MORE_SUBTITLE_FADE_DELAY) / SUBTITLE_FADE_DELAY);
         wordArt.setColor(1, 1, 1, fade3);
         wordArt.draw(spriteBatch, game.GAME_NAME, game.WIDTH / 1.85f, game.HEIGHT / 1.8f);
     }
