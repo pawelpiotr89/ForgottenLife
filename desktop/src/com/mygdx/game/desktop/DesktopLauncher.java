@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		config.title = ForgottenLife.GAME_NAME;
 		config.width = ForgottenLife.WIDTH;
 		config.height = ForgottenLife.HEIGHT;
+		config.fullscreen = true;
 		config.resizable = false;
 		new LwjglApplication(new ForgottenLife(), config);
 	}
