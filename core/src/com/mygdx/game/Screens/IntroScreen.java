@@ -19,7 +19,7 @@ public class IntroScreen extends AbstractScreen{
     private static final float SUBTITLE_FADE_DELAY = 0.5f;
     private static final float MORE_SUBTITLE_FADE_DELAY = 1.2f;
     private float fadeElapsed = 0;
-    private float fade3;
+    private float fade1, fade2, fade3;
     private int delay = 10;
 
     public IntroScreen(ForgottenLife game) {
@@ -38,8 +38,14 @@ public class IntroScreen extends AbstractScreen{
         fadeElapsed += delta / delay;
 
         // when last text goes full opaque go to menu screen
-        transparentToOpaque();
+        goToMenuScreen();
+    }
 
+    @Override
+    public void dispose(){
+        super.dispose();
+        wordArt.dispose();
+        spriteBatch.dispose();
     }
 
     private void drawingText() {
@@ -49,14 +55,14 @@ public class IntroScreen extends AbstractScreen{
     }
 
     private void drawingCompanyName() {
-        float fade = Interpolation.fade.apply(fadeElapsed / FADE_IN_TIME);
-        wordArt.setColor(1, 1, 1, fade);
+        fade1 = Interpolation.fade.apply(fadeElapsed / FADE_IN_TIME);
+        wordArt.setColor(1, 1, 1, fade1);
         wordArt.draw(spriteBatch, nameOfCompany, game.WIDTH / 2.15f, game.HEIGHT / 1.6f);
 
     }
 
     private void drawingPresents() {
-        float fade2 = Interpolation.fade.apply((fadeElapsed - SUBTITLE_FADE_DELAY) / FADE_IN_TIME);
+        fade2 = Interpolation.fade.apply((fadeElapsed - SUBTITLE_FADE_DELAY) / FADE_IN_TIME);
         wordArt.setColor(1, 1, 1, fade2);
         wordArt.draw(spriteBatch, presents, game.WIDTH / 1.96f, game.HEIGHT / 1.7f);
     }
@@ -67,7 +73,7 @@ public class IntroScreen extends AbstractScreen{
         wordArt.draw(spriteBatch, game.GAME_NAME, game.WIDTH / 1.85f, game.HEIGHT / 1.8f);
     }
 
-    private void transparentToOpaque() {
+    private void goToMenuScreen() {
         if (fade3 >= 1){
             game.setScreen(new MenuScreen(game));
         }
