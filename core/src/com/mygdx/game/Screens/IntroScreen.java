@@ -38,9 +38,8 @@ public class IntroScreen extends AbstractScreen{
         fadeElapsed += delta / delay;
 
         // when last text goes full opaque go to menu screen
-        if (fade3 >= 1){
-            game.setScreen(new MenuScreen(game));
-        }
+        transparentToOpaque();
+
     }
 
     private void drawingText() {
@@ -66,6 +65,12 @@ public class IntroScreen extends AbstractScreen{
         fade3 = Interpolation.fade.apply((fadeElapsed - MORE_SUBTITLE_FADE_DELAY) / SUBTITLE_FADE_DELAY);
         wordArt.setColor(1, 1, 1, fade3);
         wordArt.draw(spriteBatch, game.GAME_NAME, game.WIDTH / 1.85f, game.HEIGHT / 1.8f);
+    }
+
+    private void transparentToOpaque() {
+        if (fade3 >= 1){
+            game.setScreen(new MenuScreen(game));
+        }
     }
 
 }
