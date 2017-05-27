@@ -7,8 +7,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.ForgottenLife;
+import com.mygdx.game.Menu.Buttons.AbstractButton;
+import com.mygdx.game.Menu.Buttons.StartButton;
+
 
 import java.util.Iterator;
+
 
 /**
  * Created by Roxven89 on 23.05.2017.
@@ -37,7 +41,7 @@ public class MenuScreen extends  AbstractScreen {
         spriteBatch.end();
 
         makingRain();
-        iteringRain();
+        removingDrops();
     }
 
     @Override
@@ -69,7 +73,7 @@ public class MenuScreen extends  AbstractScreen {
         }
     }
 
-    private void iteringRain() {
+    private void removingDrops() {
         Iterator<Rectangle> iter = drops.iterator();
         while(iter.hasNext()) {
             Rectangle dropp = iter.next();
