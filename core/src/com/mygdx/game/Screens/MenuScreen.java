@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -28,6 +29,8 @@ public class MenuScreen extends  AbstractScreen {
     private Array<Rectangle> drops;
     private Skin skin;
     private TextButton startGameButton;
+    private FreeTypeFontGenerator generator;
+    private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     private long timeOfLastDrop;
     private int buttonSizeWidth;
     private int buttonSizeHeight;
@@ -39,6 +42,8 @@ public class MenuScreen extends  AbstractScreen {
         super(game);
         menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
         dropImage = new Texture(Gdx.files.internal("drop1.png"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         drops = new Array<Rectangle>();
         buttonSizeWidth = (int)ForgottenLife.WIDTH / 8;
         buttonSizeHeight = (int)ForgottenLife.HEIGHT / 20;
@@ -72,21 +77,15 @@ public class MenuScreen extends  AbstractScreen {
         menuBackground.dispose();
         menuBackground.dispose();
         dropImage.dispose();
+        generator.dispose();
         spriteBatch.dispose();
         stage.dispose();
     }
 
     private void createBasicSkin(){
-        //Create a font
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/myfont.ttf"));
-        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 12;
-        BitmapFont font12 = generator.generateFont(parameter); // font size 12 pixels
-        parameter.size = 32;
-        BitmapFont font32 = generator.generateFont(parameter); // font size 32
-        generator.dispose(); // don't forget to dispose to avoid memory leaks!
+        parameter.size = 20;
+        BitmapFont font = generator.generateFont(parameter);
         Color fontColor = new Color(Color.ORANGE);
-        font.getData().setScale(1.0f, 1.0f);
         skin = new Skin();
         skin.add("default", font);
         skin.add("fontColor", fontColor);
