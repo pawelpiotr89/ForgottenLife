@@ -27,7 +27,7 @@ public class MenuScreen extends  AbstractScreen {
     private Texture dropImage;
     private Array<Rectangle> drops;
     private Skin skin;
-    private TextButton startGame;
+    private TextButton startGameButton;
     private long timeOfLastDrop;
     private int buttonSizeWidth;
     private int buttonSizeHeight;
@@ -46,9 +46,9 @@ public class MenuScreen extends  AbstractScreen {
         buttonVerticalPosition = (int)((ForgottenLife.HEIGHT / 2) - (buttonSizeHeight / 2));
 
         createBasicSkin();
-        startGame = new TextButton("START GAME", skin);
-        startGame.setPosition( buttonHorizontalPosition, buttonVerticalPosition);
-        stage.addActor(startGame);
+        startGameButton = new TextButton("START GAME", skin);
+        startGameButton.setPosition(buttonHorizontalPosition, buttonVerticalPosition + (int) ForgottenLife.HEIGHT / 6);
+        stage.addActor(startGameButton);
     }
 
     @Override
@@ -78,9 +78,18 @@ public class MenuScreen extends  AbstractScreen {
 
     private void createBasicSkin(){
         //Create a font
-        BitmapFont font = new BitmapFont();
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/myfont.ttf"));
+        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.size = 12;
+        BitmapFont font12 = generator.generateFont(parameter); // font size 12 pixels
+        parameter.size = 32;
+        BitmapFont font32 = generator.generateFont(parameter); // font size 32
+        generator.dispose(); // don't forget to dispose to avoid memory leaks!
+        Color fontColor = new Color(Color.ORANGE);
+        font.getData().setScale(1.0f, 1.0f);
         skin = new Skin();
         skin.add("default", font);
+        skin.add("fontColor", fontColor);
 
         //Create a texture
         Pixmap pixmap = new Pixmap(buttonSizeWidth, buttonSizeHeight, Pixmap.Format.RGB888);
@@ -90,11 +99,12 @@ public class MenuScreen extends  AbstractScreen {
 
         //Create a button style
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = skin.newDrawable("background", Color.GRAY);
-        textButtonStyle.down = skin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.checked = skin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.over = skin.newDrawable("background", Color.LIGHT_GRAY);
+        textButtonStyle.up = skin.newDrawable("background", 255, 255, 255, 0);
+        textButtonStyle.down = skin.newDrawable("background", 255, 255, 255, 0);
+        textButtonStyle.checked = skin.newDrawable("background", 255, 255, 255, 0);
+        textButtonStyle.over = skin.newDrawable("background", 255, 255, 255, 0);
         textButtonStyle.font = skin.getFont("default");
+        textButtonStyle.fontColor = skin.getColor("fontColor");
         skin.add("default", textButtonStyle);
     }
 
