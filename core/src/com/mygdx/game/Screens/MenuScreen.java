@@ -78,10 +78,12 @@ public class MenuScreen extends  AbstractScreen {
     private void createBasicSkin(){
         parameter.size = fontSizeMenu;
         BitmapFont font = generator.generateFont(parameter);
-        Color fontColor = new Color(Color.ORANGE);
+        Color fontColor = new Color(Color.WHITE);
+        Color overFontColor = new Color(Color.ORANGE);
         skin = new Skin();
         skin.add("default", font);
         skin.add("fontColor", fontColor);
+        skin.add("overFontColor", overFontColor);
 
         //Create a texture
         Pixmap pixmap = new Pixmap(buttonSizeWidth, buttonSizeHeight, Pixmap.Format.RGB888);
@@ -93,6 +95,9 @@ public class MenuScreen extends  AbstractScreen {
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = skin.getFont("default");
         textButtonStyle.fontColor = skin.getColor("fontColor");
+        textButtonStyle.overFontColor = skin.getColor("overFontColor");
+        textButtonStyle.checkedFontColor = skin.getColor("overFontColor");
+        textButtonStyle.checkedOverFontColor = skin.getColor("overFontColor");
         skin.add("default", textButtonStyle);
     }
 
@@ -100,7 +105,7 @@ public class MenuScreen extends  AbstractScreen {
         int n = 0;
         while(n < 40){
             Rectangle dropp = new Rectangle();
-            dropp.x = MathUtils.random(-480, 1920 - 16);
+            dropp.x = MathUtils.random(-580, 1920 - 16);
             dropp.y = 1080;
             dropp.width = 8;
             dropp.height = 8;
