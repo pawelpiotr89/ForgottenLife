@@ -29,6 +29,8 @@ public class MenuScreen extends  AbstractScreen {
     private Array<Rectangle> drops;
     private Skin skin;
     private TextButton startGameButton;
+    private TextButton optionsButton;
+    private TextButton exitGameButton;
     private FreeTypeFontGenerator generator;
     private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     private long timeOfLastDrop;
@@ -36,6 +38,7 @@ public class MenuScreen extends  AbstractScreen {
     private int buttonSizeHeight;
     private int buttonHorizontalPosition;
     private int buttonVerticalPosition;
+    private int fontSize;
 
 
     public MenuScreen(ForgottenLife game) {
@@ -45,15 +48,22 @@ public class MenuScreen extends  AbstractScreen {
         generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         drops = new Array<Rectangle>();
-        buttonSizeWidth = (int)ForgottenLife.WIDTH / 8;
-        buttonSizeHeight = (int)ForgottenLife.HEIGHT / 20;
+        buttonSizeWidth = (int)ForgottenLife.WIDTH / 6;
+        buttonSizeHeight = (int)ForgottenLife.HEIGHT / 16;
         buttonHorizontalPosition = (int)((ForgottenLife.WIDTH / 2) - (buttonSizeWidth / 2));
         buttonVerticalPosition = (int)((ForgottenLife.HEIGHT / 2) - (buttonSizeHeight / 2));
+        fontSize = (int) ForgottenLife.HEIGHT / 20;
 
         createBasicSkin();
         startGameButton = new TextButton("START GAME", skin);
-        startGameButton.setPosition(buttonHorizontalPosition, buttonVerticalPosition + (int) ForgottenLife.HEIGHT / 6);
+        startGameButton.setPosition(buttonHorizontalPosition, buttonVerticalPosition + (int) ForgottenLife.HEIGHT / 4);
         stage.addActor(startGameButton);
+        optionsButton = new TextButton("OPTIONS", skin);
+        optionsButton.setPosition(buttonHorizontalPosition + ((int) buttonSizeWidth / 7), buttonVerticalPosition + (int) ForgottenLife.HEIGHT / 10);
+        stage.addActor(optionsButton);
+        exitGameButton = new TextButton("EXIT", skin);
+        exitGameButton.setPosition(buttonHorizontalPosition + ((int) buttonSizeWidth / 3), buttonVerticalPosition - (int) ForgottenLife.HEIGHT / 16);
+        stage.addActor(exitGameButton);
     }
 
     @Override
@@ -83,7 +93,7 @@ public class MenuScreen extends  AbstractScreen {
     }
 
     private void createBasicSkin(){
-        parameter.size = 20;
+        parameter.size = fontSize;
         BitmapFont font = generator.generateFont(parameter);
         Color fontColor = new Color(Color.ORANGE);
         skin = new Skin();
@@ -98,10 +108,6 @@ public class MenuScreen extends  AbstractScreen {
 
         //Create a button style
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = skin.newDrawable("background", 255, 255, 255, 0);
-        textButtonStyle.down = skin.newDrawable("background", 255, 255, 255, 0);
-        textButtonStyle.checked = skin.newDrawable("background", 255, 255, 255, 0);
-        textButtonStyle.over = skin.newDrawable("background", 255, 255, 255, 0);
         textButtonStyle.font = skin.getFont("default");
         textButtonStyle.fontColor = skin.getColor("fontColor");
         skin.add("default", textButtonStyle);
