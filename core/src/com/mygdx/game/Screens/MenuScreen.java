@@ -43,21 +43,11 @@ public class MenuScreen extends  AbstractScreen {
         dropImage = new Texture(Gdx.files.internal("drop1.png"));
         drops = new Array<Rectangle>();
 
-        buttonSizeWidth = (int)ForgottenLife.WIDTH / 6;
-        buttonSizeHeight = (int)ForgottenLife.HEIGHT / 16;
-        buttonHorizontalPosition = (int)((ForgottenLife.WIDTH / 2) - (buttonSizeWidth / 2));
-        buttonVerticalPosition = (int)((ForgottenLife.HEIGHT / 2) - (buttonSizeHeight / 2));
-        fontSizeMenu = (int) ForgottenLife.HEIGHT / 20;
+        settingButtons();
         createBasicSkin();
-        startGameButton = new TextButton("START GAME", skin);
-        startGameButton.setPosition(buttonHorizontalPosition, buttonVerticalPosition + (int) ForgottenLife.HEIGHT / 4);
-        stage.addActor(startGameButton);
-        optionsButton = new TextButton("OPTIONS", skin);
-        optionsButton.setPosition(buttonHorizontalPosition + ((int) buttonSizeWidth / 7), buttonVerticalPosition + (int) ForgottenLife.HEIGHT / 10);
-        stage.addActor(optionsButton);
-        exitGameButton = new TextButton("EXIT", skin);
-        exitGameButton.setPosition(buttonHorizontalPosition + ((int) buttonSizeWidth / 3), buttonVerticalPosition - (int) ForgottenLife.HEIGHT / 16);
-        stage.addActor(exitGameButton);
+        createStartButton();
+        createOptionsButton();
+        createExitButton();
     }
 
     @Override
@@ -78,7 +68,6 @@ public class MenuScreen extends  AbstractScreen {
     @Override
     public void dispose(){
         super.dispose();
-        menuBackground.dispose();
         menuBackground.dispose();
         dropImage.dispose();
         generator.dispose();
@@ -135,5 +124,31 @@ public class MenuScreen extends  AbstractScreen {
             dropp.y -= 981 * Gdx.graphics.getDeltaTime();
             if(dropp.y + 64 < 0) iter.remove();
         }
+    }
+
+    private void settingButtons() {
+        buttonSizeWidth = ForgottenLife.WIDTH / 6;
+        buttonSizeHeight = ForgottenLife.HEIGHT / 16;
+        buttonHorizontalPosition = (ForgottenLife.WIDTH / 2) - (buttonSizeWidth / 2);
+        buttonVerticalPosition = (ForgottenLife.HEIGHT / 2) - (buttonSizeHeight / 2);
+        fontSizeMenu = ForgottenLife.HEIGHT / 20;
+    }
+
+    private void createStartButton() {
+        startGameButton = new TextButton("START GAME", skin);
+        startGameButton.setPosition(buttonHorizontalPosition, buttonVerticalPosition + ForgottenLife.HEIGHT / 4);
+        stage.addActor(startGameButton);
+    }
+
+    private void createOptionsButton() {
+        optionsButton = new TextButton("OPTIONS", skin);
+        optionsButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 7), buttonVerticalPosition + ForgottenLife.HEIGHT / 10);
+        stage.addActor(optionsButton);
+    }
+
+    private void createExitButton() {
+        exitGameButton = new TextButton("EXIT", skin);
+        exitGameButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 3), buttonVerticalPosition - ForgottenLife.HEIGHT / 16);
+        stage.addActor(exitGameButton);
     }
 }

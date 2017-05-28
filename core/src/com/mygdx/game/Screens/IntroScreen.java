@@ -21,12 +21,12 @@ public class IntroScreen extends AbstractScreen{
     private float fadeElapsed = 0;
     private float fade1, fade2, fade3;
     //should be more than 10
-    private int delay = 10;
+    private int delay = 1;
     private int fontSizeIntro;
 
     public IntroScreen(ForgottenLife game) {
         super(game);
-        fontSizeIntro = (int)ForgottenLife.WIDTH / 30;
+        fontSizeIntro = ForgottenLife.WIDTH / 30;
         parameter.size = fontSizeIntro;
         wordArt = generator.generateFont(parameter);
     }
@@ -61,20 +61,20 @@ public class IntroScreen extends AbstractScreen{
     private void drawingCompanyName() {
         fade1 = Interpolation.fade.apply(fadeElapsed / FADE_IN_TIME);
         wordArt.setColor(1, 1, 1, fade1);
-        wordArt.draw(spriteBatch, nameOfCompany, game.WIDTH / 8.0f, game.HEIGHT / 1.2f);
+        wordArt.draw(spriteBatch, nameOfCompany, ForgottenLife.WIDTH / 8.0f, ForgottenLife.HEIGHT / 1.2f);
 
     }
 
     private void drawingPresents() {
         fade2 = Interpolation.fade.apply((fadeElapsed - SUBTITLE_FADE_DELAY) / FADE_IN_TIME);
         wordArt.setColor(1, 1, 1, fade2);
-        wordArt.draw(spriteBatch, presents, game.WIDTH / 2.9f, game.HEIGHT / 1.7f);
+        wordArt.draw(spriteBatch, presents, ForgottenLife.WIDTH / 2.9f, ForgottenLife.HEIGHT / 1.7f);
     }
 
     private void drawingGameName() {
         fade3 = Interpolation.fade.apply((fadeElapsed - MORE_SUBTITLE_FADE_DELAY) / SUBTITLE_FADE_DELAY);
         wordArt.setColor(1, 1, 1, fade3);
-        wordArt.draw(spriteBatch, game.GAME_NAME, game.WIDTH / 2.02f, game.HEIGHT / 2.9f);
+        wordArt.draw(spriteBatch, ForgottenLife.GAME_NAME, ForgottenLife.WIDTH / 2.02f, ForgottenLife.HEIGHT / 2.9f);
     }
 
     private void goToMenuScreen() {
