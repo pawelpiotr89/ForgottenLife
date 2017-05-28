@@ -20,7 +20,8 @@ public class IntroScreen extends AbstractScreen{
     private static final float MORE_SUBTITLE_FADE_DELAY = 1.2f;
     private float fadeElapsed = 0;
     private float fade1, fade2, fade3;
-    private int delay = 10;
+    //should be more than 10
+    private int delay = 1;
 
     public IntroScreen(ForgottenLife game) {
         super(game);
