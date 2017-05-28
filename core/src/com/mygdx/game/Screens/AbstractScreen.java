@@ -5,7 +5,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.ForgottenLife;
 
@@ -20,6 +22,10 @@ public abstract class AbstractScreen implements Screen {
     protected Stage stage;
     private OrthographicCamera camera;
     protected SpriteBatch spriteBatch;
+    protected FreeTypeFontGenerator generator;
+    protected FreeTypeFontGenerator.FreeTypeFontParameter parameter;
+    protected Skin skin;
+
 
     public AbstractScreen(ForgottenLife game){
         this.game = game;
@@ -27,6 +33,8 @@ public abstract class AbstractScreen implements Screen {
         stage = new Stage(new StretchViewport(ForgottenLife.WIDTH, ForgottenLife.HEIGHT, camera));
         spriteBatch = new SpriteBatch();
         Gdx.input.setInputProcessor(stage);
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
     }
 
     private void createCamera() {
@@ -67,6 +75,7 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void dispose() {
+        generator.dispose();
         game.dispose();
     }
 

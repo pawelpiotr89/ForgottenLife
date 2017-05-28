@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -27,33 +26,28 @@ public class MenuScreen extends  AbstractScreen {
     private Texture menuBackground;
     private Texture dropImage;
     private Array<Rectangle> drops;
-    private Skin skin;
     private TextButton startGameButton;
     private TextButton optionsButton;
     private TextButton exitGameButton;
-    private FreeTypeFontGenerator generator;
-    private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     private long timeOfLastDrop;
     private int buttonSizeWidth;
     private int buttonSizeHeight;
     private int buttonHorizontalPosition;
     private int buttonVerticalPosition;
-    private int fontSize;
-
+    private int fontSizeMenu;
 
     public MenuScreen(ForgottenLife game) {
         super(game);
         menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
+
         dropImage = new Texture(Gdx.files.internal("drop1.png"));
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
-        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         drops = new Array<Rectangle>();
+
         buttonSizeWidth = (int)ForgottenLife.WIDTH / 6;
         buttonSizeHeight = (int)ForgottenLife.HEIGHT / 16;
         buttonHorizontalPosition = (int)((ForgottenLife.WIDTH / 2) - (buttonSizeWidth / 2));
         buttonVerticalPosition = (int)((ForgottenLife.HEIGHT / 2) - (buttonSizeHeight / 2));
-        fontSize = (int) ForgottenLife.HEIGHT / 20;
-
+        fontSizeMenu = (int) ForgottenLife.HEIGHT / 20;
         createBasicSkin();
         startGameButton = new TextButton("START GAME", skin);
         startGameButton.setPosition(buttonHorizontalPosition, buttonVerticalPosition + (int) ForgottenLife.HEIGHT / 4);
@@ -93,7 +87,7 @@ public class MenuScreen extends  AbstractScreen {
     }
 
     private void createBasicSkin(){
-        parameter.size = fontSize;
+        parameter.size = fontSizeMenu;
         BitmapFont font = generator.generateFont(parameter);
         Color fontColor = new Color(Color.ORANGE);
         skin = new Skin();
