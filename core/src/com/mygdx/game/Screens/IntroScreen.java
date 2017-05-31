@@ -21,7 +21,7 @@ public class IntroScreen extends AbstractScreen{
     private float fadeElapsed = 0;
     private float fade1, fade2, fade3;
     //should be more than 10
-    private int delay = 1;
+    private int delay = 5;
     private int fontSizeIntro;
 
     public IntroScreen(ForgottenLife game) {

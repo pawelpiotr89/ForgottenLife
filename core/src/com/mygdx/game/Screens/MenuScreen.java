@@ -7,11 +7,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.ForgottenLife;
+import com.mygdx.game.Screens.OptionsScreen.OptionsScreen;
+import com.mygdx.game.Screens.SentencesScreens.PrologueSentence;
 
 
 import java.util.Iterator;
@@ -36,7 +40,7 @@ public class MenuScreen extends  AbstractScreen {
     private int buttonVerticalPosition;
     private int fontSizeMenu;
 
-    public MenuScreen(ForgottenLife game) {
+    MenuScreen(ForgottenLife game) {
         super(game);
         menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
 
@@ -142,18 +146,39 @@ public class MenuScreen extends  AbstractScreen {
     private void createStartButton() {
         startGameButton = new TextButton("START GAME", skin);
         startGameButton.setPosition(buttonHorizontalPosition, buttonVerticalPosition + ForgottenLife.HEIGHT / 4);
+        startGameButton.addListener(new InputListener(){
+                                        @Override
+                                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                            game.setScreen(new PrologueSentence(game));
+                                            return super.touchDown(event, x, y, pointer, button);
+                                        }
+                                    });
         stage.addActor(startGameButton);
     }
 
     private void createOptionsButton() {
         optionsButton = new TextButton("OPTIONS", skin);
         optionsButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 7), buttonVerticalPosition + ForgottenLife.HEIGHT / 10);
+        optionsButton.addListener(new InputListener(){
+                                        @Override
+                                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                            game.setScreen(new OptionsScreen(game));
+                                            return super.touchDown(event, x, y, pointer, button);
+                                        }
+                                    });
         stage.addActor(optionsButton);
     }
 
     private void createExitButton() {
         exitGameButton = new TextButton("EXIT", skin);
         exitGameButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 3), buttonVerticalPosition - ForgottenLife.HEIGHT / 16);
+        exitGameButton.addListener(new InputListener(){
+                                       @Override
+                                       public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                           Gdx.app.exit();
+                                           return super.touchDown(event, x, y, pointer, button);
+                                       }
+                                   });
         stage.addActor(exitGameButton);
     }
 }
