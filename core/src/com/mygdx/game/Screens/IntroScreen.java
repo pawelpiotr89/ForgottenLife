@@ -1,5 +1,6 @@
 package com.mygdx.game.Screens;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.game.ForgottenLife;
@@ -21,7 +22,7 @@ public class IntroScreen extends AbstractScreen{
     private float fadeElapsed = 0;
     private float fade1, fade2, fade3;
     //should be more than 10
-    private int delay = 5;
+    private int delay = 1;
     private int fontSizeIntro;
 
     public IntroScreen(ForgottenLife game) {
@@ -60,20 +61,20 @@ public class IntroScreen extends AbstractScreen{
 
     private void drawingCompanyName() {
         fade1 = Interpolation.fade.apply(fadeElapsed / FADE_IN_TIME);
-        wordArtIntro.setColor(1, 1, 1, fade1);
+        wordArtIntro.setColor(new Color(Color.rgba8888(1, 1, 1, fade1)));;
         wordArtIntro.draw(spriteBatch, nameOfCompany, ForgottenLife.WIDTH / 8.0f, ForgottenLife.HEIGHT / 1.2f);
 
     }
 
     private void drawingPresents() {
         fade2 = Interpolation.fade.apply((fadeElapsed - SUBTITLE_FADE_DELAY) / FADE_IN_TIME);
-        wordArtIntro.setColor(1, 1, 1, fade2);
+        wordArtIntro.setColor(new Color(Color.rgba8888(1, 1, 1, fade2)));
         wordArtIntro.draw(spriteBatch, presents, ForgottenLife.WIDTH / 2.9f, ForgottenLife.HEIGHT / 1.7f);
     }
 
     private void drawingGameName() {
         fade3 = Interpolation.fade.apply((fadeElapsed - MORE_SUBTITLE_FADE_DELAY) / SUBTITLE_FADE_DELAY);
-        wordArtIntro.setColor(1, 1, 1, fade3);
+        wordArtIntro.setColor(new Color(Color.rgba8888(1, 1, 1, fade3)));
         wordArtIntro.draw(spriteBatch, ForgottenLife.GAME_NAME, ForgottenLife.WIDTH / 2.02f, ForgottenLife.HEIGHT / 2.9f);
     }
 

@@ -82,8 +82,8 @@ public class MenuScreen extends  AbstractScreen {
     private void createBasicSkin(){
         parameter.size = fontSizeMenu;
         BitmapFont font = generator.generateFont(parameter);
-        Color fontColor = new Color(Color.WHITE);
-        Color overFontColor = new Color(Color.ORANGE);
+        Color fontColor = new Color((new Color(Color.rgba8888(1, 1, 1, 1))));
+        Color overFontColor = new Color((new Color(Color.rgba8888(1, 0.6f, 0, 1))));
         skin = new Skin();
         skin.add("default", font);
         skin.add("fontColor", fontColor);
@@ -91,7 +91,7 @@ public class MenuScreen extends  AbstractScreen {
 
         //Create a texture
         Pixmap pixmap = new Pixmap(buttonSizeWidth, buttonSizeHeight, Pixmap.Format.RGB888);
-        pixmap.setColor(Color.WHITE);
+        pixmap.setColor(new Color(Color.rgba8888(1, 1, 1, 1)));
         pixmap.fill();
         skin.add("background",new Texture(pixmap));
 

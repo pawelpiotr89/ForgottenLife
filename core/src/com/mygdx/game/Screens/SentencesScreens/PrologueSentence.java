@@ -1,5 +1,6 @@
 package com.mygdx.game.Screens.SentencesScreens;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.Screens.AbstractScreen;
@@ -35,10 +36,11 @@ public class PrologueSentence extends AbstractScreen {
         super.dispose();
         wordArtPrologue.dispose();
         spriteBatch.dispose();
+        generator.dispose();
     }
 
     private void drawingPrologueName() {
-        wordArtPrologue.setColor(1, 1, 1, 1);
-        wordArtPrologue.draw(spriteBatch, prologueName, ForgottenLife.WIDTH / 2.0f, ForgottenLife.HEIGHT / 2.0f);
+        wordArtPrologue.setColor(new Color(Color.rgba8888(1, 0.6f, 0, 1)));
+        wordArtPrologue.draw(spriteBatch, prologueName, ForgottenLife.WIDTH / 3f, ForgottenLife.HEIGHT / 3f);
     }
 }
