@@ -13,7 +13,7 @@ public class IntroScreen extends AbstractScreen{
 
     private final String nameOfCompany = "Long Distance Runner";
     private final String presents = "Presents";
-    private BitmapFont wordArt;
+    private BitmapFont wordArtIntro;
 
     private static final float FADE_IN_TIME = 1f;
     private static final float SUBTITLE_FADE_DELAY = 0.5f;
@@ -28,7 +28,7 @@ public class IntroScreen extends AbstractScreen{
         super(game);
         fontSizeIntro = ForgottenLife.WIDTH / 30;
         parameter.size = fontSizeIntro;
-        wordArt = generator.generateFont(parameter);
+        wordArtIntro = generator.generateFont(parameter);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class IntroScreen extends AbstractScreen{
     @Override
     public void dispose(){
         super.dispose();
-        wordArt.dispose();
+        wordArtIntro.dispose();
         spriteBatch.dispose();
     }
 
@@ -60,21 +60,21 @@ public class IntroScreen extends AbstractScreen{
 
     private void drawingCompanyName() {
         fade1 = Interpolation.fade.apply(fadeElapsed / FADE_IN_TIME);
-        wordArt.setColor(1, 1, 1, fade1);
-        wordArt.draw(spriteBatch, nameOfCompany, ForgottenLife.WIDTH / 8.0f, ForgottenLife.HEIGHT / 1.2f);
+        wordArtIntro.setColor(1, 1, 1, fade1);
+        wordArtIntro.draw(spriteBatch, nameOfCompany, ForgottenLife.WIDTH / 8.0f, ForgottenLife.HEIGHT / 1.2f);
 
     }
 
     private void drawingPresents() {
         fade2 = Interpolation.fade.apply((fadeElapsed - SUBTITLE_FADE_DELAY) / FADE_IN_TIME);
-        wordArt.setColor(1, 1, 1, fade2);
-        wordArt.draw(spriteBatch, presents, ForgottenLife.WIDTH / 2.9f, ForgottenLife.HEIGHT / 1.7f);
+        wordArtIntro.setColor(1, 1, 1, fade2);
+        wordArtIntro.draw(spriteBatch, presents, ForgottenLife.WIDTH / 2.9f, ForgottenLife.HEIGHT / 1.7f);
     }
 
     private void drawingGameName() {
         fade3 = Interpolation.fade.apply((fadeElapsed - MORE_SUBTITLE_FADE_DELAY) / SUBTITLE_FADE_DELAY);
-        wordArt.setColor(1, 1, 1, fade3);
-        wordArt.draw(spriteBatch, ForgottenLife.GAME_NAME, ForgottenLife.WIDTH / 2.02f, ForgottenLife.HEIGHT / 2.9f);
+        wordArtIntro.setColor(1, 1, 1, fade3);
+        wordArtIntro.draw(spriteBatch, ForgottenLife.GAME_NAME, ForgottenLife.WIDTH / 2.02f, ForgottenLife.HEIGHT / 2.9f);
     }
 
     private void goToMenuScreen() {
