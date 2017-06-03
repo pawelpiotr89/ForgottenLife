@@ -30,8 +30,10 @@ public class MenuScreen extends  AbstractScreen {
 
     private Texture menuBackground;
     private Texture dropImage;
+    private Texture cloud1;
     private Array<Rectangle> drops;
     private Array<Rectangle> dropsBackground;
+    private Array<Rectangle> dropsFarBackground;
     private TextButton startGameButton;
     private TextButton optionsButton;
     private TextButton exitGameButton;
@@ -46,8 +48,10 @@ public class MenuScreen extends  AbstractScreen {
         super(game);
         menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
         dropImage = new Texture(Gdx.files.internal("drop1.png"));
+        cloud1 = new Texture(Gdx.files.internal("cloud1.png"));
         drops = new Array<Rectangle>();
         dropsBackground = new Array<Rectangle>();
+        dropsFarBackground = new Array<Rectangle>();
 
         settingButtons();
         createBasicSkin();
@@ -61,8 +65,10 @@ public class MenuScreen extends  AbstractScreen {
         super.render(delta);
         spriteBatch.begin();
         spriteBatch.draw(menuBackground, 0, 0);
+        spriteBatch.draw(cloud1, -700, 800);
         drawingDrops();
         drawingDropsBackground();
+        drawingDropsFarBackground();
         spriteBatch.end();
 
         stage.act();
@@ -70,8 +76,10 @@ public class MenuScreen extends  AbstractScreen {
 
         makingRain();
         makingRainBackground();
+        makingRainFarBackground();
         removingDrops();
         removingDropsBackground();
+        removingDropsFarBackground();
     }
 
     @Override
@@ -79,6 +87,7 @@ public class MenuScreen extends  AbstractScreen {
         super.dispose();
         menuBackground.dispose();
         dropImage.dispose();
+        cloud1.dispose();
     }
 
     private void createBasicSkin(){
@@ -109,10 +118,10 @@ public class MenuScreen extends  AbstractScreen {
 
     private void makingRain() {
         int n = 0;
-        while(n < 40){
+        while(n < 35){
             Rectangle dropp = new Rectangle();
             dropp.x = MathUtils.random(-580, 1920 - 16);
-            dropp.y = 1080;
+            dropp.y = MathUtils.random(900,1050);
             dropp.width = 8;
             dropp.height = 8;
             drops.add(dropp);
@@ -123,13 +132,27 @@ public class MenuScreen extends  AbstractScreen {
 
     private void makingRainBackground() {
         int n = 0;
-        while(n < 40){
+        while(n < 30){
             Rectangle dropp2 = new Rectangle();
             dropp2.x = MathUtils.random(-580, 1920 - 16);
-            dropp2.y = 1080;
-            dropp2.width = 8;
-            dropp2.height = 8;
+            dropp2.y = MathUtils.random(850,1030);
+            dropp2.width = 4;
+            dropp2.height = 4;
             dropsBackground.add(dropp2);
+            timeOfLastDrop = TimeUtils.millis();
+            n++;
+        }
+    }
+
+    private void makingRainFarBackground() {
+        int n = 0;
+        while(n < 20){
+            Rectangle dropp3 = new Rectangle();
+            dropp3.x = MathUtils.random(0, 1920 + 580);
+            dropp3.y = MathUtils.random(800,1000);
+            dropp3.width = 2;
+            dropp3.height = 2;
+            dropsFarBackground.add(dropp3);
             timeOfLastDrop = TimeUtils.millis();
             n++;
         }
@@ -144,6 +167,12 @@ public class MenuScreen extends  AbstractScreen {
     private void drawingDropsBackground() {
         for(Rectangle dropp2: dropsBackground) {
             spriteBatch.draw(dropImage, dropp2.x, dropp2.y);
+        }
+    }
+
+    private void drawingDropsFarBackground() {
+        for(Rectangle dropp3: dropsFarBackground) {
+            spriteBatch.draw(dropImage, dropp3.x, dropp3.y);
         }
     }
 
@@ -163,7 +192,17 @@ public class MenuScreen extends  AbstractScreen {
             Rectangle dropp2 = iter.next();
             dropp2.x += 1 * Gdx.graphics.getDeltaTime();
             dropp2.y -= 981 * Gdx.graphics.getDeltaTime();
-            if(dropp2.y + 64 < MathUtils.random(0,550)) iter.remove();
+            if(dropp2.y + 64 < MathUtils.random(0,450)) iter.remove();
+        }
+    }
+
+    private void removingDropsFarBackground() {
+        Iterator<Rectangle> iter = dropsFarBackground.iterator();
+        while(iter.hasNext()) {
+            Rectangle dropp3 = iter.next();
+            dropp3.x -= 450 * Gdx.graphics.getDeltaTime();
+            dropp3.y -= 981 * Gdx.graphics.getDeltaTime();
+            if(dropp3.y + 64 < MathUtils.random(0,750)) iter.remove();
         }
     }
 
