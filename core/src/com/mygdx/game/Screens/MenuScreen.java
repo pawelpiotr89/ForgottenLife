@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.Screens.OptionsScreen.OptionsScreen;
 import com.mygdx.game.Screens.SentencesScreens.PrologueSentence;
@@ -30,6 +31,7 @@ public class MenuScreen extends  AbstractScreen {
     private Texture menuBackground;
     private Texture dropImage;
     private Array<Rectangle> drops;
+    private Array<Rectangle> dropsBackground;
     private TextButton startGameButton;
     private TextButton optionsButton;
     private TextButton exitGameButton;
@@ -45,6 +47,7 @@ public class MenuScreen extends  AbstractScreen {
         menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
         dropImage = new Texture(Gdx.files.internal("drop1.png"));
         drops = new Array<Rectangle>();
+        dropsBackground = new Array<Rectangle>();
 
         settingButtons();
         createBasicSkin();
@@ -59,13 +62,16 @@ public class MenuScreen extends  AbstractScreen {
         spriteBatch.begin();
         spriteBatch.draw(menuBackground, 0, 0);
         drawingDrops();
+        drawingDropsBackground();
         spriteBatch.end();
 
         stage.act();
         stage.draw();
 
         makingRain();
+        makingRainBackground();
         removingDrops();
+        removingDropsBackground();
     }
 
     @Override
@@ -115,9 +121,29 @@ public class MenuScreen extends  AbstractScreen {
         }
     }
 
+    private void makingRainBackground() {
+        int n = 0;
+        while(n < 40){
+            Rectangle dropp2 = new Rectangle();
+            dropp2.x = MathUtils.random(-580, 1920 - 16);
+            dropp2.y = 1080;
+            dropp2.width = 8;
+            dropp2.height = 8;
+            dropsBackground.add(dropp2);
+            timeOfLastDrop = TimeUtils.millis();
+            n++;
+        }
+    }
+
     private void drawingDrops() {
-        for(Rectangle dropp: drops) {
+        for (Rectangle dropp : drops) {
             spriteBatch.draw(dropImage, dropp.x, dropp.y);
+        }
+    }
+
+    private void drawingDropsBackground() {
+        for(Rectangle dropp2: dropsBackground) {
+            spriteBatch.draw(dropImage, dropp2.x, dropp2.y);
         }
     }
 
@@ -128,6 +154,16 @@ public class MenuScreen extends  AbstractScreen {
             dropp.x += 500 * Gdx.graphics.getDeltaTime();
             dropp.y -= 981 * Gdx.graphics.getDeltaTime();
             if(dropp.y + 64 < 0) iter.remove();
+        }
+    }
+
+    private void removingDropsBackground() {
+        Iterator<Rectangle> iter = dropsBackground.iterator();
+        while(iter.hasNext()) {
+            Rectangle dropp2 = iter.next();
+            dropp2.x += 1 * Gdx.graphics.getDeltaTime();
+            dropp2.y -= 981 * Gdx.graphics.getDeltaTime();
+            if(dropp2.y + 64 < MathUtils.random(0,550)) iter.remove();
         }
     }
 

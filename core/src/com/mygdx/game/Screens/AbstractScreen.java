@@ -32,8 +32,6 @@ public abstract class AbstractScreen implements Screen {
     protected float SUBTITLE_FADE_DELAY;
     protected float MORE_SUBTITLE_FADE_DELAY;
     protected float fadeElapsed;
-    protected float fade1, fade2, fade3;
-    //should be more than 10
     protected int delay = 1;
 
 
@@ -45,6 +43,7 @@ public abstract class AbstractScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
     }
 
     private void createCamera() {
@@ -58,7 +57,7 @@ public abstract class AbstractScreen implements Screen {
         clearScreen();
         camera.update();
         spriteBatch.setProjectionMatrix(camera.combined);
-        fadeElapsed += delta / delay;
+
     }
 
     @Override

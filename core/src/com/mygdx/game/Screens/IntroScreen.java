@@ -16,6 +16,7 @@ public class IntroScreen extends AbstractScreen{
     private final String presents = "Presents";
     private BitmapFont wordArtIntro;
     private int fontSizeIntro;
+    private float fade1, fade2, fade3;
 
     public IntroScreen(ForgottenLife game) {
         super(game);
@@ -34,6 +35,8 @@ public class IntroScreen extends AbstractScreen{
         spriteBatch.begin();
         drawingText();
         spriteBatch.end();
+
+        fadeElapsed += delta / delay;
 
         // when last text goes full opaque go to menu screen
         goToMenuScreen();
@@ -65,7 +68,7 @@ public class IntroScreen extends AbstractScreen{
 
     private void drawingGameName() {
         fade3 = Interpolation.fade.apply((fadeElapsed - MORE_SUBTITLE_FADE_DELAY) / SUBTITLE_FADE_DELAY);
-        wordArtIntro.setColor(new Color(Color.rgba8888(1, 1, 1, fade3)));
+        wordArtIntro.setColor(new Color(Color.rgba8888(1, 0.6f, 0, fade3)));
         wordArtIntro.draw(spriteBatch, ForgottenLife.GAME_NAME, ForgottenLife.WIDTH / 2.02f, ForgottenLife.HEIGHT / 2.9f);
     }
 

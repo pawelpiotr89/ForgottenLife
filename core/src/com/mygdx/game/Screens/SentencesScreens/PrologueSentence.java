@@ -20,6 +20,7 @@ public class PrologueSentence extends AbstractScreen {
     private int fontSizePrologue;
     private int fontSizeSentence;
     private int fontSizeAuthor;
+    private float fade1, fade2, fade3;
 
 
     public PrologueSentence(ForgottenLife game) {
@@ -27,12 +28,16 @@ public class PrologueSentence extends AbstractScreen {
         fontSizePrologue = ForgottenLife.WIDTH / 20;
         fontSizeSentence = ForgottenLife.WIDTH / 30;
         fontSizeAuthor = ForgottenLife.WIDTH / 40;
+        FADE_IN_TIME = 1f;
+        SUBTITLE_FADE_DELAY = 0.5f;
+        MORE_SUBTITLE_FADE_DELAY = 1.2f;
         parameter.size = fontSizePrologue;
         wordArtPrologue = generator.generateFont(parameter);
         parameter.size = fontSizeSentence;
         wordArtSentence = generator.generateFont(parameter);
         parameter.size = fontSizeAuthor;
         wordArtAuthor = generator.generateFont(parameter);
+        fadeElapsed = 0;
     }
 
     @Override
@@ -43,6 +48,8 @@ public class PrologueSentence extends AbstractScreen {
         drawingPrologueSentence();
         drawingSentenceAuthor();
         spriteBatch.end();
+
+        fadeElapsed += delta / delay;
     }
 
     @Override
@@ -61,7 +68,7 @@ public class PrologueSentence extends AbstractScreen {
 
     private void drawingPrologueSentence() {
         fade2 = Interpolation.fade.apply((fadeElapsed - SUBTITLE_FADE_DELAY) / FADE_IN_TIME);
-        wordArtSentence.setColor(new Color(Color.argb8888(1, 1, 1, fade1)));
+        wordArtSentence.setColor(new Color(Color.argb8888(1, 1, 1, fade2)));
         wordArtSentence.draw(spriteBatch, prologueSentence, ForgottenLife.WIDTH / 100f, ForgottenLife.HEIGHT / sentenceHightPosition);
     }
 
