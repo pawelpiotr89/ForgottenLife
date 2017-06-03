@@ -25,6 +25,10 @@ public abstract class AbstractScreen implements Screen {
     protected FreeTypeFontGenerator generator;
     protected FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     protected Skin skin;
+    protected float episodHightPosition = 1.15f;
+    protected float sentenceHightPosition = 1.8f;
+    protected float authorHightPosition = 2.6f;
+
 
 
     public AbstractScreen(ForgottenLife game){
