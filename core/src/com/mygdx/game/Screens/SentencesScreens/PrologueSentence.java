@@ -2,6 +2,7 @@ package com.mygdx.game.Screens.SentencesScreens;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.Screens.AbstractScreen;
 
@@ -48,22 +49,25 @@ public class PrologueSentence extends AbstractScreen {
     public void dispose(){
         super.dispose();
         wordArtPrologue.dispose();
-        spriteBatch.dispose();
-        generator.dispose();
+        wordArtSentence.dispose();
+        wordArtAuthor.dispose();
     }
 
     private void drawingPrologueName() {
-        wordArtPrologue.setColor(new Color(Color.rgba8888(1, 0.6f, 0, 1)));
+        fade1 = Interpolation.fade.apply(fadeElapsed / FADE_IN_TIME);
+        wordArtPrologue.setColor(new Color(Color.rgba8888(1, 0.6f, 0, fade1)));
         wordArtPrologue.draw(spriteBatch, prologueName, (ForgottenLife.WIDTH / 2.7f) , ForgottenLife.HEIGHT / episodHightPosition);
     }
 
     private void drawingPrologueSentence() {
-        wordArtSentence.setColor(new Color(Color.argb8888(1, 1, 1, 1)));
+        fade2 = Interpolation.fade.apply((fadeElapsed - SUBTITLE_FADE_DELAY) / FADE_IN_TIME);
+        wordArtSentence.setColor(new Color(Color.argb8888(1, 1, 1, fade1)));
         wordArtSentence.draw(spriteBatch, prologueSentence, ForgottenLife.WIDTH / 100f, ForgottenLife.HEIGHT / sentenceHightPosition);
     }
 
     private void drawingSentenceAuthor() {
-        wordArtAuthor.setColor(new Color(Color.argb8888(1, 1, 1, 1)));
+        fade3 = Interpolation.fade.apply((fadeElapsed - MORE_SUBTITLE_FADE_DELAY) / SUBTITLE_FADE_DELAY);
+        wordArtAuthor.setColor(new Color(Color.argb8888(1, 1, 1, fade3)));
         wordArtAuthor.draw(spriteBatch, sentenceAuthor, ForgottenLife.WIDTH / 2.4f, ForgottenLife.HEIGHT / authorHightPosition);
     }
 }

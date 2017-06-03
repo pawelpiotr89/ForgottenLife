@@ -43,7 +43,6 @@ public class MenuScreen extends  AbstractScreen {
     MenuScreen(ForgottenLife game) {
         super(game);
         menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
-
         dropImage = new Texture(Gdx.files.internal("drop1.png"));
         drops = new Array<Rectangle>();
 
@@ -74,9 +73,6 @@ public class MenuScreen extends  AbstractScreen {
         super.dispose();
         menuBackground.dispose();
         dropImage.dispose();
-        generator.dispose();
-        spriteBatch.dispose();
-        stage.dispose();
     }
 
     private void createBasicSkin(){

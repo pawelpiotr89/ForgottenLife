@@ -25,10 +25,16 @@ public abstract class AbstractScreen implements Screen {
     protected FreeTypeFontGenerator generator;
     protected FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     protected Skin skin;
-    protected float episodHightPosition = 1.15f;
-    protected float sentenceHightPosition = 1.8f;
-    protected float authorHightPosition = 2.6f;
-
+    protected final float episodHightPosition = 1.15f;
+    protected final float sentenceHightPosition = 1.8f;
+    protected final float authorHightPosition = 2.6f;
+    protected float FADE_IN_TIME;
+    protected float SUBTITLE_FADE_DELAY;
+    protected float MORE_SUBTITLE_FADE_DELAY;
+    protected float fadeElapsed;
+    protected float fade1, fade2, fade3;
+    //should be more than 10
+    protected int delay = 1;
 
 
     public AbstractScreen(ForgottenLife game){
@@ -52,6 +58,7 @@ public abstract class AbstractScreen implements Screen {
         clearScreen();
         camera.update();
         spriteBatch.setProjectionMatrix(camera.combined);
+        fadeElapsed += delta / delay;
     }
 
     @Override
@@ -80,6 +87,9 @@ public abstract class AbstractScreen implements Screen {
     @Override
     public void dispose() {
         generator.dispose();
+        skin.dispose();
+        stage.dispose();
+        spriteBatch.dispose();
         game.dispose();
     }
 
