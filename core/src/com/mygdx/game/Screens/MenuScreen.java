@@ -32,10 +32,12 @@ public class MenuScreen extends  AbstractScreen {
     private Texture dropImage2;
     private Texture dropImage3;
     private Texture cloud1;
+    private Texture cloud2;
     private Array<Rectangle> drops;
     private Array<Rectangle> dropsBackground;
     private Array<Rectangle> dropsFarBackground;
     private Rectangle firstCloud;
+    private Rectangle secondCloud;
     private TextButton startGameButton;
     private TextButton optionsButton;
     private TextButton exitGameButton;
@@ -53,7 +55,9 @@ public class MenuScreen extends  AbstractScreen {
         dropImage2 = new Texture(Gdx.files.internal("drop2.png"));
         dropImage3 = new Texture(Gdx.files.internal("drop3.png"));
         cloud1 = new Texture(Gdx.files.internal("cloud1.png"));
+        cloud2 = new Texture(Gdx.files.internal("cloud2.png"));
         firstCloud = new Rectangle();
+        secondCloud = new Rectangle();
         drops = new Array<Rectangle>();
         dropsBackground = new Array<Rectangle>();
         dropsFarBackground = new Array<Rectangle>();
@@ -64,6 +68,7 @@ public class MenuScreen extends  AbstractScreen {
         createOptionsButton();
         createExitButton();
         makingFirstCloud();
+        makingSecondCloud();
     }
 
     @Override
@@ -75,6 +80,7 @@ public class MenuScreen extends  AbstractScreen {
         drawingDropsBackground();
         drawingDropsFarBackground();
         drawingFirstCloud();
+        drawingSecondCloud();
         spriteBatch.end();
 
         stage.act();
@@ -87,6 +93,7 @@ public class MenuScreen extends  AbstractScreen {
         removingDropsBackground();
         removingDropsFarBackground();
         movingFirstCloud();
+        movingSecondCloud();
     }
 
     @Override
@@ -97,6 +104,7 @@ public class MenuScreen extends  AbstractScreen {
         dropImage2.dispose();
         dropImage3.dispose();
         cloud1.dispose();
+        cloud2.dispose();
     }
 
     private void createBasicSkin(){
@@ -132,13 +140,38 @@ public class MenuScreen extends  AbstractScreen {
         firstCloud.height = 100;
     }
 
+    private void makingSecondCloud(){
+        secondCloud.x = -450;
+        secondCloud.y = 760;
+        secondCloud.width = 210;
+        secondCloud.height = 90;
+    }
+
     private void drawingFirstCloud(){
         spriteBatch.draw(cloud1, firstCloud.x, firstCloud.y);
 
     }
 
+    private void drawingSecondCloud(){
+        spriteBatch.draw(cloud2, secondCloud.x, secondCloud.y);
+    }
+
     private void movingFirstCloud(){
-        firstCloud.x += 10 * Gdx.graphics.getDeltaTime();
+        if(firstCloud.x < 1920) {
+            firstCloud.x += 10 * Gdx.graphics.getDeltaTime();
+        }
+        if(firstCloud.x > 1920){
+            firstCloud.x = -750;
+        }
+    }
+
+    private void movingSecondCloud(){
+        if(secondCloud.x < 1920) {
+            secondCloud.x += 13 * Gdx.graphics.getDeltaTime();
+        }
+        if(secondCloud.x > 1920){
+            secondCloud.x = -750;
+        }
     }
 
     private void makingRain() {
@@ -146,7 +179,7 @@ public class MenuScreen extends  AbstractScreen {
         while(n < 30){
             Rectangle dropp = new Rectangle();
             dropp.x = MathUtils.random(-580, 1920 - 16);
-            dropp.y = MathUtils.random(900,1050);
+            dropp.y = MathUtils.random(900,940);
             dropp.width = 8;
             dropp.height = 8;
             drops.add(dropp);
@@ -160,7 +193,7 @@ public class MenuScreen extends  AbstractScreen {
         while(n < 25){
             Rectangle dropp2 = new Rectangle();
             dropp2.x = MathUtils.random(-580, 1920 - 16);
-            dropp2.y = MathUtils.random(850,1030);
+            dropp2.y = MathUtils.random(850,940);
             dropp2.width = 4;
             dropp2.height = 4;
             dropsBackground.add(dropp2);
@@ -174,7 +207,7 @@ public class MenuScreen extends  AbstractScreen {
         while(n < 20){
             Rectangle dropp3 = new Rectangle();
             dropp3.x = MathUtils.random(0, 1920 + 580);
-            dropp3.y = MathUtils.random(800,1000);
+            dropp3.y = MathUtils.random(800,940);
             dropp3.width = 2;
             dropp3.height = 2;
             dropsFarBackground.add(dropp3);
