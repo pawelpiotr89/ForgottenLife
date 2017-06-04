@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.Screens.OptionsScreen.OptionsScreen;
 import com.mygdx.game.Screens.SentencesScreens.PrologueSentence;
@@ -30,10 +29,13 @@ public class MenuScreen extends  AbstractScreen {
 
     private Texture menuBackground;
     private Texture dropImage;
+    private Texture dropImage2;
+    private Texture dropImage3;
     private Texture cloud1;
     private Array<Rectangle> drops;
     private Array<Rectangle> dropsBackground;
     private Array<Rectangle> dropsFarBackground;
+    private Rectangle firstCloud;
     private TextButton startGameButton;
     private TextButton optionsButton;
     private TextButton exitGameButton;
@@ -48,7 +50,10 @@ public class MenuScreen extends  AbstractScreen {
         super(game);
         menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
         dropImage = new Texture(Gdx.files.internal("drop1.png"));
+        dropImage2 = new Texture(Gdx.files.internal("drop2.png"));
+        dropImage3 = new Texture(Gdx.files.internal("drop3.png"));
         cloud1 = new Texture(Gdx.files.internal("cloud1.png"));
+        firstCloud = new Rectangle();
         drops = new Array<Rectangle>();
         dropsBackground = new Array<Rectangle>();
         dropsFarBackground = new Array<Rectangle>();
@@ -58,6 +63,7 @@ public class MenuScreen extends  AbstractScreen {
         createStartButton();
         createOptionsButton();
         createExitButton();
+        makingFirstCloud();
     }
 
     @Override
@@ -65,10 +71,10 @@ public class MenuScreen extends  AbstractScreen {
         super.render(delta);
         spriteBatch.begin();
         spriteBatch.draw(menuBackground, 0, 0);
-        spriteBatch.draw(cloud1, -700, 800);
         drawingDrops();
         drawingDropsBackground();
         drawingDropsFarBackground();
+        drawingFirstCloud();
         spriteBatch.end();
 
         stage.act();
@@ -80,6 +86,7 @@ public class MenuScreen extends  AbstractScreen {
         removingDrops();
         removingDropsBackground();
         removingDropsFarBackground();
+        movingFirstCloud();
     }
 
     @Override
@@ -87,6 +94,8 @@ public class MenuScreen extends  AbstractScreen {
         super.dispose();
         menuBackground.dispose();
         dropImage.dispose();
+        dropImage2.dispose();
+        dropImage3.dispose();
         cloud1.dispose();
     }
 
@@ -116,9 +125,25 @@ public class MenuScreen extends  AbstractScreen {
         skin.add("default", textButtonStyle);
     }
 
+    private void makingFirstCloud(){
+        firstCloud.x = -750;
+        firstCloud.y = 800;
+        firstCloud.width = 200;
+        firstCloud.height = 100;
+    }
+
+    private void drawingFirstCloud(){
+        spriteBatch.draw(cloud1, firstCloud.x, firstCloud.y);
+
+    }
+
+    private void movingFirstCloud(){
+        firstCloud.x += 10 * Gdx.graphics.getDeltaTime();
+    }
+
     private void makingRain() {
         int n = 0;
-        while(n < 35){
+        while(n < 30){
             Rectangle dropp = new Rectangle();
             dropp.x = MathUtils.random(-580, 1920 - 16);
             dropp.y = MathUtils.random(900,1050);
@@ -132,7 +157,7 @@ public class MenuScreen extends  AbstractScreen {
 
     private void makingRainBackground() {
         int n = 0;
-        while(n < 30){
+        while(n < 25){
             Rectangle dropp2 = new Rectangle();
             dropp2.x = MathUtils.random(-580, 1920 - 16);
             dropp2.y = MathUtils.random(850,1030);
@@ -166,13 +191,13 @@ public class MenuScreen extends  AbstractScreen {
 
     private void drawingDropsBackground() {
         for(Rectangle dropp2: dropsBackground) {
-            spriteBatch.draw(dropImage, dropp2.x, dropp2.y);
+            spriteBatch.draw(dropImage3, dropp2.x, dropp2.y);
         }
     }
 
     private void drawingDropsFarBackground() {
         for(Rectangle dropp3: dropsFarBackground) {
-            spriteBatch.draw(dropImage, dropp3.x, dropp3.y);
+            spriteBatch.draw(dropImage2, dropp3.x, dropp3.y);
         }
     }
 
