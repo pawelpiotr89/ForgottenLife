@@ -18,6 +18,8 @@ import com.mygdx.game.Screens.OptionsScreen.OptionsScreen;
 import com.mygdx.game.Screens.SentencesScreens.PrologueSentence;
 
 
+import org.w3c.dom.css.Rect;
+
 import java.util.Iterator;
 
 
@@ -33,11 +35,17 @@ public class MenuScreen extends  AbstractScreen {
     private Texture dropImage3;
     private Texture cloud1;
     private Texture cloud2;
+    private Texture cloud3;
+    private Texture cloud4;
+    private Texture cloud5;
     private Array<Rectangle> drops;
     private Array<Rectangle> dropsBackground;
     private Array<Rectangle> dropsFarBackground;
     private Rectangle firstCloud;
     private Rectangle secondCloud;
+    private Rectangle thirdCloud;
+    private Rectangle fourthCloud;
+    private Rectangle fifthCloud;
     private TextButton startGameButton;
     private TextButton optionsButton;
     private TextButton exitGameButton;
@@ -56,8 +64,14 @@ public class MenuScreen extends  AbstractScreen {
         dropImage3 = new Texture(Gdx.files.internal("drop3.png"));
         cloud1 = new Texture(Gdx.files.internal("cloud1.png"));
         cloud2 = new Texture(Gdx.files.internal("cloud2.png"));
+        cloud3 = new Texture(Gdx.files.internal("cloud3.png"));
+        cloud4 = new Texture(Gdx.files.internal("cloud4.png"));
+        cloud5 = new Texture(Gdx.files.internal("cloud5.png"));
         firstCloud = new Rectangle();
         secondCloud = new Rectangle();
+        thirdCloud = new Rectangle();
+        fourthCloud = new Rectangle();
+        fifthCloud = new Rectangle();
         drops = new Array<Rectangle>();
         dropsBackground = new Array<Rectangle>();
         dropsFarBackground = new Array<Rectangle>();
@@ -69,6 +83,9 @@ public class MenuScreen extends  AbstractScreen {
         createExitButton();
         makingFirstCloud();
         makingSecondCloud();
+        makingThirdCloud();
+        makingFourthCloud();
+        makingFifthCloud();
     }
 
     @Override
@@ -80,7 +97,10 @@ public class MenuScreen extends  AbstractScreen {
         drawingDropsBackground();
         drawingDropsFarBackground();
         drawingFirstCloud();
+        drawingFifthCloud();
+        drawingThirdCloud();
         drawingSecondCloud();
+        drawingFourthCloud();
         spriteBatch.end();
 
         stage.act();
@@ -94,6 +114,9 @@ public class MenuScreen extends  AbstractScreen {
         removingDropsFarBackground();
         movingFirstCloud();
         movingSecondCloud();
+        movingThirdCloud();
+        movingFourthCloud();
+        movingFifthCloud();
     }
 
     @Override
@@ -134,17 +157,38 @@ public class MenuScreen extends  AbstractScreen {
     }
 
     private void makingFirstCloud(){
-        firstCloud.x = -750;
+        firstCloud.x = -650;
         firstCloud.y = 800;
         firstCloud.width = 200;
         firstCloud.height = 100;
     }
 
     private void makingSecondCloud(){
-        secondCloud.x = -450;
+        secondCloud.x = -200;
         secondCloud.y = 760;
         secondCloud.width = 210;
         secondCloud.height = 90;
+    }
+
+    private void makingThirdCloud(){
+        thirdCloud.x = 300;
+        thirdCloud.y = 820;
+        thirdCloud.width = 190;
+        thirdCloud.height = 110;
+    }
+
+    private void makingFourthCloud(){
+        fourthCloud.x = 700;
+        fourthCloud.y = 780;
+        fourthCloud.width = 205;
+        fourthCloud.height = 105;
+    }
+
+    private void makingFifthCloud(){
+        fifthCloud.x = 1100;
+        fifthCloud.y = 790;
+        fifthCloud.width = 195;
+        fifthCloud.height = 95;
     }
 
     private void drawingFirstCloud(){
@@ -156,9 +200,21 @@ public class MenuScreen extends  AbstractScreen {
         spriteBatch.draw(cloud2, secondCloud.x, secondCloud.y);
     }
 
+    private void drawingThirdCloud(){
+        spriteBatch.draw(cloud3, thirdCloud.x, thirdCloud.y);
+    }
+
+    private void drawingFourthCloud(){
+        spriteBatch.draw(cloud4, fourthCloud.x, fourthCloud.y);
+    }
+
+    private void drawingFifthCloud(){
+        spriteBatch.draw(cloud5, fifthCloud.x, fifthCloud.y);
+    }
+
     private void movingFirstCloud(){
         if(firstCloud.x < 1920) {
-            firstCloud.x += 10 * Gdx.graphics.getDeltaTime();
+            firstCloud.x += 11 * Gdx.graphics.getDeltaTime();
         }
         if(firstCloud.x > 1920){
             firstCloud.x = -750;
@@ -167,10 +223,37 @@ public class MenuScreen extends  AbstractScreen {
 
     private void movingSecondCloud(){
         if(secondCloud.x < 1920) {
-            secondCloud.x += 13 * Gdx.graphics.getDeltaTime();
+            secondCloud.x += 12 * Gdx.graphics.getDeltaTime();
         }
         if(secondCloud.x > 1920){
             secondCloud.x = -750;
+        }
+    }
+
+    private void movingThirdCloud(){
+        if(thirdCloud.x < 1920) {
+            thirdCloud.x += 13 * Gdx.graphics.getDeltaTime();
+        }
+        if(thirdCloud.x > 1920){
+            thirdCloud.x = -750;
+        }
+    }
+
+    private void movingFourthCloud(){
+        if(fourthCloud.x < 1920) {
+            fourthCloud.x += 14 * Gdx.graphics.getDeltaTime();
+        }
+        if(fourthCloud.x > 1920){
+            fourthCloud.x = -750;
+        }
+    }
+
+    private void movingFifthCloud(){
+        if(fifthCloud.x < 1920) {
+            fifthCloud.x += 9 * Gdx.graphics.getDeltaTime();
+        }
+        if(fifthCloud.x > 1920){
+            fifthCloud.x = -750;
         }
     }
 
