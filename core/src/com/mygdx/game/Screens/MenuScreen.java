@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -39,6 +41,10 @@ public class MenuScreen extends  AbstractScreen {
     private Texture cloud4;
     private Texture cloud5;
     private Texture cloud6;
+    private Texture waveBackground1;
+    private Texture waveBackground2;
+    private Texture waveBackground3;
+    private Animation waveAnimation;
     private Array<Rectangle> drops;
     private Array<Rectangle> dropsBackground;
     private Array<Rectangle> dropsFarBackground;
@@ -59,6 +65,7 @@ public class MenuScreen extends  AbstractScreen {
     private int fontSizeMenu;
     private int xWidth;
     private int yHight;
+    private float elapsedTime = 0;
 
     MenuScreen(ForgottenLife game) {
         super(game);
@@ -72,6 +79,10 @@ public class MenuScreen extends  AbstractScreen {
         cloud4 = new Texture(Gdx.files.internal("cloud4.png"));
         cloud5 = new Texture(Gdx.files.internal("cloud5.png"));
         cloud6 = new Texture(Gdx.files.internal("cloud3.png"));
+        waveBackground1 = new Texture(Gdx.files.internal("waveBackground1.png"));
+        waveBackground2 = new Texture(Gdx.files.internal("waveBackground2.png"));
+        waveBackground3 = new Texture(Gdx.files.internal("waveBackground3.png"));
+        waveAnimation = new Animation(0.12f, waveBackground1, waveBackground2, waveBackground3);
         firstCloud = new Rectangle();
         secondCloud = new Rectangle();
         thirdCloud = new Rectangle();
@@ -101,7 +112,9 @@ public class MenuScreen extends  AbstractScreen {
     public void render(float delta){
         super.render(delta);
         spriteBatch.begin();
+        elapsedTime += Gdx.graphics.getDeltaTime();
         spriteBatch.draw(menuBackground, 0, 0);
+        spriteBatch.draw((Texture) waveAnimation.getKeyFrame(elapsedTime, true), 0, 0);
         drawingDrops();
         drawingDropsBackground();
         drawingDropsFarBackground();
@@ -143,6 +156,9 @@ public class MenuScreen extends  AbstractScreen {
         cloud4.dispose();
         cloud5.dispose();
         cloud6.dispose();
+        waveBackground1.dispose();
+        waveBackground2.dispose();
+        waveBackground3.dispose();
     }
 
     private void createBasicSkin(){
