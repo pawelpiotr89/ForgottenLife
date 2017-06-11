@@ -82,7 +82,7 @@ public class MenuScreen extends  AbstractScreen {
         dropsBackground = new Array<Rectangle>();
         dropsFarBackground = new Array<Rectangle>();
         xWidth = 560;
-        yHight = 260;
+        yHight = 350;
 
         settingButtons();
         createBasicSkin();
@@ -172,43 +172,43 @@ public class MenuScreen extends  AbstractScreen {
     }
 
     private void makingFirstCloud(){
-        firstCloud.x = -650;
-        firstCloud.y = 800;
+        firstCloud.x = -550;
+        firstCloud.y = 850;
         firstCloud.width = xWidth;
         firstCloud.height = yHight;
     }
 
     private void makingSecondCloud(){
-        secondCloud.x = -200;
-        secondCloud.y = 800;
+        secondCloud.x = -100;
+        secondCloud.y = 850;
         secondCloud.width = xWidth;
         secondCloud.height = yHight;
     }
 
     private void makingThirdCloud(){
         thirdCloud.x = 300;
-        thirdCloud.y = 820;
+        thirdCloud.y = 850;
         thirdCloud.width = xWidth;
         thirdCloud.height = yHight;
     }
 
     private void makingFourthCloud(){
         fourthCloud.x = 700;
-        fourthCloud.y = 780;
+        fourthCloud.y = 850;
         fourthCloud.width = xWidth;
         fourthCloud.height = yHight;
     }
 
     private void makingFifthCloud(){
         fifthCloud.x = 1100;
-        fifthCloud.y = 790;
+        fifthCloud.y = 850;
         fifthCloud.width = xWidth;
         fifthCloud.height = yHight;
     }
 
     private void makingSixthCloud(){
         sixthCloud.x = 1500;
-        sixthCloud.y = 800;
+        sixthCloud.y = 850;
         sixthCloud.width = xWidth;
         sixthCloud.height = yHight;
     }
@@ -240,28 +240,28 @@ public class MenuScreen extends  AbstractScreen {
 
     private void movingFirstCloud(){
         if(firstCloud.x < 1920) {
-            firstCloud.x += 6 * Gdx.graphics.getDeltaTime();
+            firstCloud.x += 8 * Gdx.graphics.getDeltaTime();
         }
         if(firstCloud.x > 1920){
-            firstCloud.x = -750;
+            firstCloud.x = -550;
         }
     }
 
     private void movingSecondCloud(){
         if(secondCloud.x < 1920) {
-            secondCloud.x += 7 * Gdx.graphics.getDeltaTime();
+            secondCloud.x += 8 * Gdx.graphics.getDeltaTime();
         }
         if(secondCloud.x > 1920){
-            secondCloud.x = -750;
+            secondCloud.x = -550;
         }
     }
 
     private void movingThirdCloud(){
         if(thirdCloud.x < 1920) {
-            thirdCloud.x += 5 * Gdx.graphics.getDeltaTime();
+            thirdCloud.x += 8 * Gdx.graphics.getDeltaTime();
         }
         if(thirdCloud.x > 1920){
-            thirdCloud.x = -750;
+            thirdCloud.x = -550;
         }
     }
 
@@ -270,25 +270,25 @@ public class MenuScreen extends  AbstractScreen {
             fourthCloud.x += 8 * Gdx.graphics.getDeltaTime();
         }
         if(fourthCloud.x > 1920){
-            fourthCloud.x = -750;
+            fourthCloud.x = -550;
         }
     }
 
     private void movingFifthCloud(){
         if(fifthCloud.x < 1920) {
-            fifthCloud.x += 4 * Gdx.graphics.getDeltaTime();
+            fifthCloud.x += 8 * Gdx.graphics.getDeltaTime();
         }
         if(fifthCloud.x > 1920){
-            fifthCloud.x = -750;
+            fifthCloud.x = -550;
         }
     }
 
     private void movingSixthCloud(){
         if(sixthCloud.x < 1920) {
-            sixthCloud.x += 9 * Gdx.graphics.getDeltaTime();
+            sixthCloud.x += 8 * Gdx.graphics.getDeltaTime();
         }
         if(sixthCloud.x > 1920){
-            sixthCloud.x = -750;
+            sixthCloud.x = -550;
         }
     }
 
@@ -367,7 +367,7 @@ public class MenuScreen extends  AbstractScreen {
         while(iter.hasNext()) {
             Rectangle dropp2 = iter.next();
             dropp2.x += 1 * Gdx.graphics.getDeltaTime();
-            dropp2.y -= 981 * Gdx.graphics.getDeltaTime();
+            dropp2.y -= 1081 * Gdx.graphics.getDeltaTime();
             if(dropp2.y + 64 < MathUtils.random(0,450)) iter.remove();
         }
     }
@@ -377,7 +377,7 @@ public class MenuScreen extends  AbstractScreen {
         while(iter.hasNext()) {
             Rectangle dropp3 = iter.next();
             dropp3.x -= 450 * Gdx.graphics.getDeltaTime();
-            dropp3.y -= 981 * Gdx.graphics.getDeltaTime();
+            dropp3.y -= 1281 * Gdx.graphics.getDeltaTime();
             if(dropp3.y + 64 < MathUtils.random(0,750)) iter.remove();
         }
     }
