@@ -1,6 +1,7 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -44,6 +45,7 @@ public class MenuScreen extends  AbstractScreen {
     private Texture waveBackground1;
     private Texture waveBackground2;
     private Texture waveBackground3;
+    private Texture waveBackground4;
     private Animation waveAnimation;
     private Array<Rectangle> drops;
     private Array<Rectangle> dropsBackground;
@@ -57,6 +59,7 @@ public class MenuScreen extends  AbstractScreen {
     private TextButton startGameButton;
     private TextButton optionsButton;
     private TextButton exitGameButton;
+    private Music rainSound;
     private long timeOfLastDrop;
     private int buttonSizeWidth;
     private int buttonSizeHeight;
@@ -82,7 +85,9 @@ public class MenuScreen extends  AbstractScreen {
         waveBackground1 = new Texture(Gdx.files.internal("waveBackground1.png"));
         waveBackground2 = new Texture(Gdx.files.internal("waveBackground2.png"));
         waveBackground3 = new Texture(Gdx.files.internal("waveBackground3.png"));
-        waveAnimation = new Animation(0.12f, waveBackground1, waveBackground2, waveBackground3);
+        waveBackground4 = new Texture(Gdx.files.internal("waveBackground4.png"));
+        waveAnimation = new Animation(0.1f, waveBackground1, waveBackground2, waveBackground3, waveBackground4);
+        rainSound = Gdx.audio.newMusic(Gdx.files.internal("menuRain.mp3"));
         firstCloud = new Rectangle();
         secondCloud = new Rectangle();
         thirdCloud = new Rectangle();
@@ -106,6 +111,9 @@ public class MenuScreen extends  AbstractScreen {
         makingFourthCloud();
         makingFifthCloud();
         makingSixthCloud();
+        rainSound.setLooping(true);
+        rainSound.setVolume(0.3f);
+        rainSound.play();
     }
 
     @Override
@@ -159,6 +167,8 @@ public class MenuScreen extends  AbstractScreen {
         waveBackground1.dispose();
         waveBackground2.dispose();
         waveBackground3.dispose();
+        waveBackground4.dispose();
+        rainSound.dispose();
     }
 
     private void createBasicSkin(){
@@ -256,7 +266,7 @@ public class MenuScreen extends  AbstractScreen {
 
     private void movingFirstCloud(){
         if(firstCloud.x < 1920) {
-            firstCloud.x += 8 * Gdx.graphics.getDeltaTime();
+            firstCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
         if(firstCloud.x > 1920){
             firstCloud.x = -550;
@@ -265,7 +275,7 @@ public class MenuScreen extends  AbstractScreen {
 
     private void movingSecondCloud(){
         if(secondCloud.x < 1920) {
-            secondCloud.x += 8 * Gdx.graphics.getDeltaTime();
+            secondCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
         if(secondCloud.x > 1920){
             secondCloud.x = -550;
@@ -274,7 +284,7 @@ public class MenuScreen extends  AbstractScreen {
 
     private void movingThirdCloud(){
         if(thirdCloud.x < 1920) {
-            thirdCloud.x += 8 * Gdx.graphics.getDeltaTime();
+            thirdCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
         if(thirdCloud.x > 1920){
             thirdCloud.x = -550;
@@ -283,7 +293,7 @@ public class MenuScreen extends  AbstractScreen {
 
     private void movingFourthCloud(){
         if(fourthCloud.x < 1920) {
-            fourthCloud.x += 8 * Gdx.graphics.getDeltaTime();
+            fourthCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
         if(fourthCloud.x > 1920){
             fourthCloud.x = -550;
@@ -292,7 +302,7 @@ public class MenuScreen extends  AbstractScreen {
 
     private void movingFifthCloud(){
         if(fifthCloud.x < 1920) {
-            fifthCloud.x += 8 * Gdx.graphics.getDeltaTime();
+            fifthCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
         if(fifthCloud.x > 1920){
             fifthCloud.x = -550;
@@ -301,7 +311,7 @@ public class MenuScreen extends  AbstractScreen {
 
     private void movingSixthCloud(){
         if(sixthCloud.x < 1920) {
-            sixthCloud.x += 8 * Gdx.graphics.getDeltaTime();
+            sixthCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
         if(sixthCloud.x > 1920){
             sixthCloud.x = -550;
@@ -310,10 +320,10 @@ public class MenuScreen extends  AbstractScreen {
 
     private void makingRain() {
         int n = 0;
-        while(n < 30){
+        while(n < 25){
             Rectangle dropp = new Rectangle();
             dropp.x = MathUtils.random(-580, 1920 - 16);
-            dropp.y = MathUtils.random(900,940);
+            dropp.y = MathUtils.random(990,1000);
             dropp.width = 8;
             dropp.height = 8;
             drops.add(dropp);
@@ -324,10 +334,10 @@ public class MenuScreen extends  AbstractScreen {
 
     private void makingRainBackground() {
         int n = 0;
-        while(n < 25){
+        while(n < 15){
             Rectangle dropp2 = new Rectangle();
             dropp2.x = MathUtils.random(-580, 1920 - 16);
-            dropp2.y = MathUtils.random(850,940);
+            dropp2.y = MathUtils.random(990,1000);
             dropp2.width = 4;
             dropp2.height = 4;
             dropsBackground.add(dropp2);
@@ -338,10 +348,10 @@ public class MenuScreen extends  AbstractScreen {
 
     private void makingRainFarBackground() {
         int n = 0;
-        while(n < 20){
+        while(n < 15){
             Rectangle dropp3 = new Rectangle();
             dropp3.x = MathUtils.random(0, 1920 + 580);
-            dropp3.y = MathUtils.random(800,940);
+            dropp3.y = MathUtils.random(990,1000);
             dropp3.width = 2;
             dropp3.height = 2;
             dropsFarBackground.add(dropp3);
@@ -412,6 +422,7 @@ public class MenuScreen extends  AbstractScreen {
         startGameButton.addListener(new InputListener(){
                                         @Override
                                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                            rainSound.stop();
                                             game.setScreen(new PrologueSentence(game));
                                             return super.touchDown(event, x, y, pointer, button);
                                         }
@@ -438,6 +449,7 @@ public class MenuScreen extends  AbstractScreen {
         exitGameButton.addListener(new InputListener(){
                                        @Override
                                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                           rainSound.stop();
                                            Gdx.app.exit();
                                            return super.touchDown(event, x, y, pointer, button);
                                        }
