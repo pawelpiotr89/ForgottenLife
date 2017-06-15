@@ -56,7 +56,7 @@ public class IntroScreen extends AbstractScreen{
 
     private void drawingCompanyName() {
         fade1 = Interpolation.fade.apply(fadeElapsed / FADE_IN_TIME);
-        wordArtIntro.setColor(new Color(Color.rgba8888(1, 1, 1, fade1)));;
+        wordArtIntro.setColor(new Color(Color.rgba8888(1, 1, 1, fade1)));
         wordArtIntro.draw(spriteBatch, nameOfCompany, ForgottenLife.WIDTH / 8.0f, ForgottenLife.HEIGHT / 1.2f);
     }
 

@@ -35,8 +35,8 @@ public class PrologueSentence extends AbstractScreen {
 
         fallingLeaf = new Texture(Gdx.files.internal("leaf.png"));
         leaf = new Rectangle();
-        leaf.x = (int) ForgottenLife.WIDTH / 6f;
-        leaf.y = (int) ForgottenLife.HEIGHT / 1f;
+        leaf.x = ForgottenLife.WIDTH / 6f;
+        leaf.y = ForgottenLife.HEIGHT / 1f;
         leaf.width = 100;
         leaf.height = 100;
 
