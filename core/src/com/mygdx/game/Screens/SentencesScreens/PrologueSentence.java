@@ -40,7 +40,7 @@ public class PrologueSentence extends AbstractScreen {
         leaf.width = 100;
         leaf.height = 100;
 
-        fontSizePrologue = ForgottenLife.WIDTH / 20;
+        fontSizePrologue = ForgottenLife.WIDTH / 10;
         fontSizeSentence = ForgottenLife.WIDTH / 30;
         fontSizeAuthor = ForgottenLife.WIDTH / 40;
 
@@ -85,19 +85,19 @@ public class PrologueSentence extends AbstractScreen {
     private void drawingPrologueName() {
         fade1 = Interpolation.fade.apply(fadeElapsed / FADE_IN_TIME);
         wordArtPrologue.setColor(new Color(Color.rgba8888(1, 0.6f, 0, fade1)));
-        wordArtPrologue.draw(spriteBatch, prologueName, (ForgottenLife.WIDTH / 2.7f), ForgottenLife.HEIGHT / episodHightPosition);
+        wordArtPrologue.draw(spriteBatch, prologueName, (ForgottenLife.WIDTH / 3.5f), ForgottenLife.HEIGHT / episodHightPosition);
     }
 
     private void drawingPrologueSentence() {
         fade2 = Interpolation.fade.apply((fadeElapsed - SUBTITLE_FADE_DELAY) / FADE_IN_TIME);
         wordArtSentence.setColor(new Color(Color.argb8888(1, 1, 1, fade2)));
-        wordArtSentence.draw(spriteBatch, prologueSentence, ForgottenLife.WIDTH / 100f, ForgottenLife.HEIGHT / sentenceHightPosition);
+        wordArtSentence.draw(spriteBatch, prologueSentence, ForgottenLife.WIDTH / 25f, ForgottenLife.HEIGHT / sentenceHightPosition);
     }
 
     private void drawingSentenceAuthor() {
         fade3 = Interpolation.fade.apply((fadeElapsed - MORE_SUBTITLE_FADE_DELAY) / SUBTITLE_FADE_DELAY);
         wordArtAuthor.setColor(new Color(Color.argb8888(1, 1, 1, fade3)));
-        wordArtAuthor.draw(spriteBatch, sentenceAuthor, ForgottenLife.WIDTH / 2.4f, ForgottenLife.HEIGHT / authorHightPosition);
+        wordArtAuthor.draw(spriteBatch, sentenceAuthor, ForgottenLife.WIDTH / 2.5f, ForgottenLife.HEIGHT / authorHightPosition);
     }
 
     private void drawingFallingLeaf() {

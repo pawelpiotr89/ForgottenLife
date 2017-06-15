@@ -46,20 +46,26 @@ public class MenuScreen extends  AbstractScreen {
     private Texture waveBackground2;
     private Texture waveBackground3;
     private Texture waveBackground4;
+
     private Animation waveAnimation;
+
     private Array<Rectangle> drops;
     private Array<Rectangle> dropsBackground;
     private Array<Rectangle> dropsFarBackground;
+
     private Rectangle firstCloud;
     private Rectangle secondCloud;
     private Rectangle thirdCloud;
     private Rectangle fourthCloud;
     private Rectangle fifthCloud;
     private Rectangle sixthCloud;
+
     private TextButton startGameButton;
     private TextButton optionsButton;
     private TextButton exitGameButton;
+
     private Music rainSound;
+
     private long timeOfLastDrop;
     private int buttonSizeWidth;
     private int buttonSizeHeight;
@@ -72,6 +78,7 @@ public class MenuScreen extends  AbstractScreen {
 
     MenuScreen(ForgottenLife game) {
         super(game);
+
         menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
         dropImage = new Texture(Gdx.files.internal("drop1.png"));
         dropImage2 = new Texture(Gdx.files.internal("drop2.png"));
@@ -86,17 +93,22 @@ public class MenuScreen extends  AbstractScreen {
         waveBackground2 = new Texture(Gdx.files.internal("waveBackground2.png"));
         waveBackground3 = new Texture(Gdx.files.internal("waveBackground3.png"));
         waveBackground4 = new Texture(Gdx.files.internal("waveBackground4.png"));
+
         waveAnimation = new Animation(0.1f, waveBackground1, waveBackground2, waveBackground3, waveBackground4);
+
         rainSound = Gdx.audio.newMusic(Gdx.files.internal("menuRain.mp3"));
+
         firstCloud = new Rectangle();
         secondCloud = new Rectangle();
         thirdCloud = new Rectangle();
         fourthCloud = new Rectangle();
         fifthCloud = new Rectangle();
         sixthCloud = new Rectangle();
+
         drops = new Array<Rectangle>();
         dropsBackground = new Array<Rectangle>();
         dropsFarBackground = new Array<Rectangle>();
+
         xWidth = 560;
         yHight = 350;
 
@@ -409,11 +421,11 @@ public class MenuScreen extends  AbstractScreen {
     }
 
     private void settingButtons() {
-        buttonSizeWidth = ForgottenLife.WIDTH / 6;
-        buttonSizeHeight = ForgottenLife.HEIGHT / 16;
+        buttonSizeWidth = ForgottenLife.WIDTH / 4;
+        buttonSizeHeight = ForgottenLife.HEIGHT / 10;
         buttonHorizontalPosition = (ForgottenLife.WIDTH / 2) - (buttonSizeWidth / 2);
         buttonVerticalPosition = (ForgottenLife.HEIGHT / 2) - (buttonSizeHeight / 2);
-        fontSizeMenu = ForgottenLife.HEIGHT / 20;
+        fontSizeMenu = ForgottenLife.HEIGHT / 10;
     }
 
     private void createStartButton() {
@@ -432,7 +444,7 @@ public class MenuScreen extends  AbstractScreen {
 
     private void createOptionsButton() {
         optionsButton = new TextButton("OPTIONS", skin);
-        optionsButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 7), buttonVerticalPosition + ForgottenLife.HEIGHT / 10);
+        optionsButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 7), buttonVerticalPosition + ForgottenLife.HEIGHT / 20);
         optionsButton.addListener(new InputListener(){
                                         @Override
                                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -445,7 +457,7 @@ public class MenuScreen extends  AbstractScreen {
 
     private void createExitButton() {
         exitGameButton = new TextButton("EXIT", skin);
-        exitGameButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 3), buttonVerticalPosition - ForgottenLife.HEIGHT / 16);
+        exitGameButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 3), buttonVerticalPosition - ForgottenLife.HEIGHT / 6);
         exitGameButton.addListener(new InputListener(){
                                        @Override
                                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

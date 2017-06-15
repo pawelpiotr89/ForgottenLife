@@ -24,7 +24,7 @@ public class IntroScreen extends AbstractScreen{
         SUBTITLE_FADE_DELAY = 0.5f;
         MORE_SUBTITLE_FADE_DELAY = 1.2f;
         fadeElapsed = 0;
-        fontSizeIntro = ForgottenLife.WIDTH / 30;
+        fontSizeIntro = ForgottenLife.WIDTH / 20;
         parameter.size = fontSizeIntro;
         wordArtIntro = generator.generateFont(parameter);
     }

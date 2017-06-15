@@ -26,8 +26,8 @@ public abstract class AbstractScreen implements Screen {
     protected FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     protected Skin skin;
     protected final float episodHightPosition = 1.15f;
-    protected final float sentenceHightPosition = 1.8f;
-    protected final float authorHightPosition = 2.6f;
+    protected final float sentenceHightPosition = 2f;
+    protected final float authorHightPosition = 3f;
     protected float FADE_IN_TIME;
     protected float SUBTITLE_FADE_DELAY;
     protected float MORE_SUBTITLE_FADE_DELAY;
@@ -41,7 +41,7 @@ public abstract class AbstractScreen implements Screen {
         stage = new Stage(new StretchViewport(ForgottenLife.WIDTH, ForgottenLife.HEIGHT, camera));
         spriteBatch = new SpriteBatch();
         Gdx.input.setInputProcessor(stage);
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("OpenSans.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("FontC.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
     }
