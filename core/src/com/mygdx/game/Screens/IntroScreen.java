@@ -1,6 +1,9 @@
 package com.mygdx.game.Screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.game.ForgottenLife;
@@ -17,6 +20,27 @@ public class IntroScreen extends AbstractScreen{
     private BitmapFont wordArtIntro;
     private int fontSizeIntro;
     private float fade1, fade2, fade3;
+    private float elapsedTime = 0;
+    private int positionX;
+    private int positionY;
+
+    private Texture frame1;
+    private Texture frame2;
+    private Texture frame3;
+    private Texture frame4;
+    private Texture frame5;
+    private Texture frame6;
+    private Texture frame7;
+    private Texture frame8;
+    private Texture frame9;
+    private Texture frame10;
+    private Texture frame11;
+    private Texture frame12;
+    private Texture frame13;
+    private Texture frame14;
+    private Texture frame15;
+
+    private Animation runnerAnimation;
 
     public IntroScreen(ForgottenLife game) {
         super(game);
@@ -27,6 +51,27 @@ public class IntroScreen extends AbstractScreen{
         fontSizeIntro = ForgottenLife.WIDTH / 20;
         parameter.size = fontSizeIntro;
         wordArtIntro = generator.generateFont(parameter);
+        positionX = -200;
+        positionY = 0;
+
+        frame1 = new Texture(Gdx.files.internal("frame1.png"));
+        frame2 = new Texture(Gdx.files.internal("frame2.png"));
+        frame3 = new Texture(Gdx.files.internal("frame3.png"));
+        frame4 = new Texture(Gdx.files.internal("frame4.png"));
+        frame5 = new Texture(Gdx.files.internal("frame5.png"));
+        frame6 = new Texture(Gdx.files.internal("frame6.png"));
+        frame7 = new Texture(Gdx.files.internal("frame7.png"));
+        frame8 = new Texture(Gdx.files.internal("frame8.png"));
+        frame9 = new Texture(Gdx.files.internal("frame9.png"));
+        frame10 = new Texture(Gdx.files.internal("frame10.png"));
+        frame11 = new Texture(Gdx.files.internal("frame11.png"));
+        frame12 = new Texture(Gdx.files.internal("frame12.png"));
+        frame13 = new Texture(Gdx.files.internal("frame13.png"));
+        frame14 = new Texture(Gdx.files.internal("frame14.png"));
+        frame15 = new Texture(Gdx.files.internal("frame15.png"));
+
+        runnerAnimation = new Animation(0.06f, frame1, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, frame10, frame11, frame12, frame13, frame14, frame15);
+
     }
 
     @Override
@@ -34,11 +79,14 @@ public class IntroScreen extends AbstractScreen{
         super.render(delta);
         spriteBatch.begin();
         drawingText();
+        spriteBatch.draw((Texture) runnerAnimation.getKeyFrame(elapsedTime, true), positionX, positionY);
         spriteBatch.end();
 
         fadeElapsed += delta / delay;
+        elapsedTime += Gdx.graphics.getDeltaTime();
 
-        // when last text goes full opaque go to menu screen
+        movingRunner();
+
         goToMenuScreen();
     }
 
@@ -46,6 +94,21 @@ public class IntroScreen extends AbstractScreen{
     public void dispose(){
         super.dispose();
         wordArtIntro.dispose();
+        frame1.dispose();
+        frame2.dispose();
+        frame3.dispose();
+        frame4.dispose();
+        frame5.dispose();
+        frame6.dispose();
+        frame7.dispose();
+        frame8.dispose();
+        frame9.dispose();
+        frame10.dispose();
+        frame11.dispose();
+        frame12.dispose();
+        frame13.dispose();
+        frame14.dispose();
+        frame15.dispose();
     }
 
     private void drawingText() {
@@ -70,6 +133,13 @@ public class IntroScreen extends AbstractScreen{
         fade3 = Interpolation.fade.apply((fadeElapsed - MORE_SUBTITLE_FADE_DELAY) / SUBTITLE_FADE_DELAY);
         wordArtIntro.setColor(new Color(Color.rgba8888(1, 0.6f, 0, fade3)));
         wordArtIntro.draw(spriteBatch, ForgottenLife.GAME_NAME, ForgottenLife.WIDTH / 2.3f, ForgottenLife.HEIGHT / 3f);
+    }
+
+    private void movingRunner() {
+        positionX += 300 * Gdx.graphics.getDeltaTime();
+        if(positionX > 1920){
+            positionX = -200;
+        }
     }
 
     private void goToMenuScreen() {

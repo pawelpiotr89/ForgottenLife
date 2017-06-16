@@ -132,7 +132,6 @@ public class MenuScreen extends  AbstractScreen {
     public void render(float delta){
         super.render(delta);
         spriteBatch.begin();
-        elapsedTime += Gdx.graphics.getDeltaTime();
         spriteBatch.draw(menuBackground, 0, 0);
         spriteBatch.draw((Texture) waveAnimation.getKeyFrame(elapsedTime, true), 0, 0);
         drawingDrops();
@@ -145,6 +144,8 @@ public class MenuScreen extends  AbstractScreen {
         drawingSecondCloud();
         drawingFourthCloud();
         spriteBatch.end();
+
+        elapsedTime += Gdx.graphics.getDeltaTime();
 
         stage.act();
         stage.draw();
