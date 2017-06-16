@@ -31,11 +31,11 @@ public class PrologueSentence extends AbstractScreen {
     private int fontSizePrologue;
     private int fontSizeSentence;
     private int fontSizeAuthor;
-    private float fade1, fade2, fade3;
     private int rotation;
     private int leafPositionX;
     private int leafPositionY;
-
+    private float fade1, fade2, fade3;
+    private int switcher;
 
     public PrologueSentence(ForgottenLife game) {
         super(game);
@@ -48,12 +48,13 @@ public class PrologueSentence extends AbstractScreen {
         fontSizeSentence = ForgottenLife.WIDTH / 30;
         fontSizeAuthor = ForgottenLife.WIDTH / 40;
         rotation = 0;
-        leafPositionX = 400;
+        leafPositionX = MathUtils.random(100,1800);
         leafPositionY = 1080;
 
         FADE_IN_TIME = 1f;
         SUBTITLE_FADE_DELAY = 0.5f;
         MORE_SUBTITLE_FADE_DELAY = 1.2f;
+        switcher = 1;
 
         parameter.size = fontSizePrologue;
         wordArtPrologue = generator.generateFont(parameter);
@@ -107,11 +108,20 @@ public class PrologueSentence extends AbstractScreen {
     }
 
     private void drawingLeaf(){
-        rotation++;
-        leafPositionY -= 65 * Gdx.graphics.getDeltaTime();
-        if(leafPositionY < -150){
+        if(switcher % 2 != 0){
+            rotation+= 100 * Gdx.graphics.getDeltaTime();
+        }
+
+        if(switcher % 2 == 0){
+            rotation-= 100 * Gdx.graphics.getDeltaTime();
+        }
+
+        leafPositionY -= 70 * Gdx.graphics.getDeltaTime();
+        if(leafPositionY < -200){
             leafPositionY = 1080;
-            leafPositionX = MathUtils.random(100,980);
+            leafPositionX = MathUtils.random(100,1800);
+            switcher++;
+            rotation = 0;
         }
     }
 }
