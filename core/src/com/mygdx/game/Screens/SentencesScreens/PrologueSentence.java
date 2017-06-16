@@ -4,8 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.Screens.AbstractScreen;
 
@@ -17,32 +18,38 @@ import java.util.Iterator;
 
 public class PrologueSentence extends AbstractScreen {
     private Texture fallingLeaf;
-    private Rectangle leaf;
+    private TextureRegion fallingLeafRegion;
+
     private final String prologueName = "PROLOGUE";
     private final String prologueSentence = "\"We forget old stories, but those stories remain the same.\"";
     private final String sentenceAuthor = "\"- Dejan Stojanovic, The Sun Watches The Sun\"";
+
     private BitmapFont wordArtPrologue;
     private BitmapFont wordArtSentence;
     private BitmapFont wordArtAuthor;
+
     private int fontSizePrologue;
     private int fontSizeSentence;
     private int fontSizeAuthor;
     private float fade1, fade2, fade3;
+    private int rotation;
+    private int leafPositionX;
+    private int leafPositionY;
 
 
     public PrologueSentence(ForgottenLife game) {
         super(game);
 
         fallingLeaf = new Texture(Gdx.files.internal("leaf.png"));
-        leaf = new Rectangle();
-        leaf.x = ForgottenLife.WIDTH / 6f;
-        leaf.y = ForgottenLife.HEIGHT / 1f;
-        leaf.width = 100;
-        leaf.height = 100;
+        fallingLeafRegion = new TextureRegion(fallingLeaf);
+
 
         fontSizePrologue = ForgottenLife.WIDTH / 10;
         fontSizeSentence = ForgottenLife.WIDTH / 30;
         fontSizeAuthor = ForgottenLife.WIDTH / 40;
+        rotation = 0;
+        leafPositionX = 400;
+        leafPositionY = 1080;
 
         FADE_IN_TIME = 1f;
         SUBTITLE_FADE_DELAY = 0.5f;
@@ -62,15 +69,14 @@ public class PrologueSentence extends AbstractScreen {
     public void render(float delta) {
         super.render(delta);
         spriteBatch.begin();
-        spriteBatch.draw(fallingLeaf, leaf.x, leaf.y);
+        spriteBatch.draw(fallingLeafRegion, leafPositionX, leafPositionY, 64, 128, 64, 64, 1, 1, rotation);
         drawingPrologueName();
         drawingPrologueSentence();
         drawingSentenceAuthor();
         spriteBatch.end();
 
         fadeElapsed += delta / delay;
-
-        drawingFallingLeaf();
+        drawingLeaf();
     }
 
     @Override
@@ -100,14 +106,12 @@ public class PrologueSentence extends AbstractScreen {
         wordArtAuthor.draw(spriteBatch, sentenceAuthor, ForgottenLife.WIDTH / 2.5f, ForgottenLife.HEIGHT / authorHightPosition);
     }
 
-    private void drawingFallingLeaf() {
-        if(leaf.x < 500){
-            leaf.x += (50 ) * Gdx.graphics.getDeltaTime();
-            leaf.y -= (100 ) * Gdx.graphics.getDeltaTime();
-        }
-        if(leaf.x >= 500 && leaf.x <= 650){
-            leaf.x += 25 * Gdx.graphics.getDeltaTime();
-            leaf.y += 10 * Gdx.graphics.getDeltaTime();
+    private void drawingLeaf(){
+        rotation++;
+        leafPositionY -= 65 * Gdx.graphics.getDeltaTime();
+        if(leafPositionY < -150){
+            leafPositionY = 1080;
+            leafPositionX = MathUtils.random(100,980);
         }
     }
 }

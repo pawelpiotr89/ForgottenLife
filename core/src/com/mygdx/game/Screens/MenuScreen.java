@@ -444,7 +444,7 @@ public class MenuScreen extends  AbstractScreen {
 
     private void createOptionsButton() {
         optionsButton = new TextButton("OPTIONS", skin);
-        optionsButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 7), buttonVerticalPosition + ForgottenLife.HEIGHT / 20);
+        optionsButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 10), buttonVerticalPosition + ForgottenLife.HEIGHT / 20);
         optionsButton.addListener(new InputListener(){
                                         @Override
                                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
