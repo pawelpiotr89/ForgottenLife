@@ -23,6 +23,7 @@ public class IntroScreen extends AbstractScreen{
     private float elapsedTime = 0;
     private int positionX;
     private int positionY;
+    private boolean animationAction;
 
     private Texture frame1;
     private Texture frame2;
@@ -36,9 +37,6 @@ public class IntroScreen extends AbstractScreen{
     private Texture frame10;
     private Texture frame11;
     private Texture frame12;
-    private Texture frame13;
-    private Texture frame14;
-    private Texture frame15;
 
     private Animation runnerAnimation;
 
@@ -51,8 +49,9 @@ public class IntroScreen extends AbstractScreen{
         fontSizeIntro = ForgottenLife.WIDTH / 20;
         parameter.size = fontSizeIntro;
         wordArtIntro = generator.generateFont(parameter);
-        positionX = -200;
+        positionX = -150;
         positionY = 0;
+        animationAction = true;
 
         frame1 = new Texture(Gdx.files.internal("frame1.png"));
         frame2 = new Texture(Gdx.files.internal("frame2.png"));
@@ -66,11 +65,8 @@ public class IntroScreen extends AbstractScreen{
         frame10 = new Texture(Gdx.files.internal("frame10.png"));
         frame11 = new Texture(Gdx.files.internal("frame11.png"));
         frame12 = new Texture(Gdx.files.internal("frame12.png"));
-        frame13 = new Texture(Gdx.files.internal("frame13.png"));
-        frame14 = new Texture(Gdx.files.internal("frame14.png"));
-        frame15 = new Texture(Gdx.files.internal("frame15.png"));
 
-        runnerAnimation = new Animation(0.06f, frame1, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, frame10, frame11, frame12, frame13, frame14, frame15);
+        runnerAnimation = new Animation(0.1f, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, frame10, frame11, frame12, frame1);
 
     }
 
@@ -79,7 +75,7 @@ public class IntroScreen extends AbstractScreen{
         super.render(delta);
         spriteBatch.begin();
         drawingText();
-        spriteBatch.draw((Texture) runnerAnimation.getKeyFrame(elapsedTime, true), positionX, positionY);
+        spriteBatch.draw((Texture) runnerAnimation.getKeyFrame(elapsedTime, animationAction), positionX, positionY);
         spriteBatch.end();
 
         fadeElapsed += delta / delay;
@@ -106,9 +102,6 @@ public class IntroScreen extends AbstractScreen{
         frame10.dispose();
         frame11.dispose();
         frame12.dispose();
-        frame13.dispose();
-        frame14.dispose();
-        frame15.dispose();
     }
 
     private void drawingText() {
@@ -136,15 +129,18 @@ public class IntroScreen extends AbstractScreen{
     }
 
     private void movingRunner() {
-        positionX += 300 * Gdx.graphics.getDeltaTime();
-        if(positionX > 1920){
-            positionX = -200;
+        if(animationAction == true) {
+            positionX += 244 * Gdx.graphics.getDeltaTime();
+            if (positionX > 1920) {
+                positionX = -150;
+            }
         }
     }
 
     private void goToMenuScreen() {
         if (fade3 >= 1){
-            game.setScreen(new MenuScreen(game));
+            animationAction = false;
+            //game.setScreen(new MenuScreen(game));
         }
     }
 
