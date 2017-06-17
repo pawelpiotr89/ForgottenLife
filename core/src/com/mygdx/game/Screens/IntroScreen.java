@@ -24,6 +24,8 @@ public class IntroScreen extends AbstractScreen{
     private int positionX;
     private int positionY;
     private boolean animationAction;
+    private float passingTime;
+    private float period;
 
     private Texture frame1;
     private Texture frame2;
@@ -38,6 +40,8 @@ public class IntroScreen extends AbstractScreen{
     private Texture frame11;
     private Texture frame12;
 
+    private Texture logo;
+
     private Animation runnerAnimation;
 
     public IntroScreen(ForgottenLife game) {
@@ -50,8 +54,10 @@ public class IntroScreen extends AbstractScreen{
         parameter.size = fontSizeIntro;
         wordArtIntro = generator.generateFont(parameter);
         positionX = -150;
-        positionY = 0;
+        positionY = 580;
         animationAction = true;
+        passingTime = 0f;
+        period = 20f;
 
         frame1 = new Texture(Gdx.files.internal("frame1.png"));
         frame2 = new Texture(Gdx.files.internal("frame2.png"));
@@ -66,6 +72,8 @@ public class IntroScreen extends AbstractScreen{
         frame11 = new Texture(Gdx.files.internal("frame11.png"));
         frame12 = new Texture(Gdx.files.internal("frame12.png"));
 
+        logo = new Texture(Gdx.files.internal("logo.png"));
+
         runnerAnimation = new Animation(0.1f, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, frame10, frame11, frame12, frame1);
 
     }
@@ -73,15 +81,16 @@ public class IntroScreen extends AbstractScreen{
     @Override
     public void render(float delta) {
         super.render(delta);
+        movingRunner();
         spriteBatch.begin();
-        drawingText();
         spriteBatch.draw((Texture) runnerAnimation.getKeyFrame(elapsedTime, animationAction), positionX, positionY);
+        drawingText();
+        drawingLogo();
         spriteBatch.end();
 
         fadeElapsed += delta / delay;
         elapsedTime += Gdx.graphics.getDeltaTime();
-
-        movingRunner();
+        calculatingTime();
 
         goToMenuScreen();
     }
@@ -119,28 +128,44 @@ public class IntroScreen extends AbstractScreen{
     private void drawingPresents() {
         fade2 = Interpolation.fade.apply((fadeElapsed - SUBTITLE_FADE_DELAY) / FADE_IN_TIME);
         wordArtIntro.setColor(new Color(Color.rgba8888(1, 1, 1, fade2)));
-        wordArtIntro.draw(spriteBatch, presents, ForgottenLife.WIDTH / 2.3f, ForgottenLife.HEIGHT / 1.7f);
+        wordArtIntro.draw(spriteBatch, presents, ForgottenLife.WIDTH / 2.3f, ForgottenLife.HEIGHT / 1.75f);
     }
 
     private void drawingGameName() {
         fade3 = Interpolation.fade.apply((fadeElapsed - MORE_SUBTITLE_FADE_DELAY) / SUBTITLE_FADE_DELAY);
         wordArtIntro.setColor(new Color(Color.rgba8888(1, 0.6f, 0, fade3)));
-        wordArtIntro.draw(spriteBatch, ForgottenLife.GAME_NAME, ForgottenLife.WIDTH / 2.3f, ForgottenLife.HEIGHT / 3f);
+        wordArtIntro.draw(spriteBatch, ForgottenLife.GAME_NAME, ForgottenLife.WIDTH / 2.3f, ForgottenLife.HEIGHT / 3.05f);
     }
 
     private void movingRunner() {
         if(animationAction == true) {
-            positionX += 244 * Gdx.graphics.getDeltaTime();
+            positionX += 238 * Gdx.graphics.getDeltaTime();
             if (positionX > 1920) {
                 positionX = -150;
             }
         }
+        if(animationAction == false){
+
+        }
+    }
+
+    private void drawingLogo(){
+        if(animationAction == false){
+            spriteBatch.draw(logo, positionX, positionY);
+        }
+    }
+
+    private void calculatingTime(){
+        passingTime += Gdx.graphics.getDeltaTime();
     }
 
     private void goToMenuScreen() {
         if (fade3 >= 1){
             animationAction = false;
-            //game.setScreen(new MenuScreen(game));
+            
+            if(passingTime > period) {
+                game.setScreen(new MenuScreen(game));
+            }
         }
     }
 
