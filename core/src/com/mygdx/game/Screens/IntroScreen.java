@@ -57,7 +57,7 @@ public class IntroScreen extends AbstractScreen{
         positionY = 580;
         animationAction = true;
         passingTime = 0f;
-        period = 20f;
+        period = 1f;
 
         frame1 = new Texture(Gdx.files.internal("frame1.png"));
         frame2 = new Texture(Gdx.files.internal("frame2.png"));
@@ -75,13 +75,12 @@ public class IntroScreen extends AbstractScreen{
         logo = new Texture(Gdx.files.internal("logo.png"));
 
         runnerAnimation = new Animation(0.1f, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, frame10, frame11, frame12, frame1);
-
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        movingRunner();
+
         spriteBatch.begin();
         spriteBatch.draw((Texture) runnerAnimation.getKeyFrame(elapsedTime, animationAction), positionX, positionY);
         drawingText();
@@ -90,9 +89,10 @@ public class IntroScreen extends AbstractScreen{
 
         fadeElapsed += delta / delay;
         elapsedTime += Gdx.graphics.getDeltaTime();
-        calculatingTime();
 
+        calculatingTime();
         goToMenuScreen();
+        movingRunner();
     }
 
     @Override
@@ -144,9 +144,6 @@ public class IntroScreen extends AbstractScreen{
                 positionX = -150;
             }
         }
-        if(animationAction == false){
-
-        }
     }
 
     private void drawingLogo(){
@@ -162,11 +159,10 @@ public class IntroScreen extends AbstractScreen{
     private void goToMenuScreen() {
         if (fade3 >= 1){
             animationAction = false;
-            
+
             if(passingTime > period) {
                 game.setScreen(new MenuScreen(game));
             }
         }
     }
-
 }

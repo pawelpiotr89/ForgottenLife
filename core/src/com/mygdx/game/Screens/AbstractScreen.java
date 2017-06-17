@@ -32,8 +32,9 @@ public abstract class AbstractScreen implements Screen {
     protected float SUBTITLE_FADE_DELAY;
     protected float MORE_SUBTITLE_FADE_DELAY;
     protected float fadeElapsed;
-    protected int delay = 10;
-
+    protected int delay = 1;
+    protected float episodeButtonPositionX;
+    protected float episodeButtonPositionY;
 
     public AbstractScreen(ForgottenLife game){
         this.game = game;
@@ -43,7 +44,8 @@ public abstract class AbstractScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         generator = new FreeTypeFontGenerator(Gdx.files.internal("FontC.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-
+        episodeButtonPositionX = (float) ForgottenLife.WIDTH / 2;
+        episodeButtonPositionY = (float) ForgottenLife.HEIGHT / 4;
     }
 
     private void createCamera() {

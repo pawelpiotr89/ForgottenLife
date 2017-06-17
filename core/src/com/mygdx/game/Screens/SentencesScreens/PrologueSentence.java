@@ -2,15 +2,18 @@ package com.mygdx.game.Screens.SentencesScreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.Screens.AbstractScreen;
-
-import java.util.Iterator;
 
 /**
  * Created by Roxven89 on 31.05.2017.
@@ -28,6 +31,8 @@ public class PrologueSentence extends AbstractScreen {
     private BitmapFont wordArtSentence;
     private BitmapFont wordArtAuthor;
 
+    private TextButton nextSceneButton;
+
     private int fontSizePrologue;
     private int fontSizeSentence;
     private int fontSizeAuthor;
@@ -42,7 +47,6 @@ public class PrologueSentence extends AbstractScreen {
 
         fallingLeaf = new Texture(Gdx.files.internal("leaf.png"));
         fallingLeafRegion = new TextureRegion(fallingLeaf);
-
 
         fontSizePrologue = ForgottenLife.WIDTH / 10;
         fontSizeSentence = ForgottenLife.WIDTH / 30;
@@ -64,6 +68,9 @@ public class PrologueSentence extends AbstractScreen {
         wordArtAuthor = generator.generateFont(parameter);
 
         fadeElapsed = 0;
+
+        createBasicSkin();
+        creatingButton();
     }
 
     @Override
@@ -77,7 +84,11 @@ public class PrologueSentence extends AbstractScreen {
         spriteBatch.end();
 
         fadeElapsed += delta / delay;
+
         drawingLeaf();
+
+        stage.act();
+        stage.draw();
     }
 
     @Override
@@ -122,6 +133,48 @@ public class PrologueSentence extends AbstractScreen {
             leafPositionX = MathUtils.random(100,1800);
             switcher++;
             rotation = 0;
+        }
+    }
+
+    private void createBasicSkin(){
+        parameter.size = fontSizePrologue;
+        BitmapFont font = generator.generateFont(parameter);
+        Color fontColor = new Color((new Color(Color.rgba8888(1, 1, 1, 1))));
+        Color overFontColor = new Color((new Color(Color.rgba8888(1, 0.6f, 0, 1))));
+        skin = new Skin();
+        skin.add("default", font);
+        skin.add("fontColor", fontColor);
+        skin.add("overFontColor", overFontColor);
+
+        //Create a texture
+        Pixmap pixmap = new Pixmap(200, 200, Pixmap.Format.RGB888);
+        pixmap.setColor(new Color(Color.rgba8888(1, 1, 1, 1)));
+        pixmap.fill();
+        skin.add("background",new Texture(pixmap));
+
+        //Create a button style
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = skin.getFont("default");
+        textButtonStyle.fontColor = skin.getColor("fontColor");
+        textButtonStyle.overFontColor = skin.getColor("overFontColor");
+        textButtonStyle.checkedFontColor = skin.getColor("overFontColor");
+        textButtonStyle.checkedOverFontColor = skin.getColor("overFontColor");
+        skin.add("default", textButtonStyle);
+    }
+
+    private void creatingButton(){
+        nextSceneButton = new TextButton ("NEXT", skin);
+        nextSceneButton.setPosition(episodeButtonPositionX, episodeButtonPositionY);
+        nextSceneButton.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
+
+        stage.addActor(nextSceneButton);
+
+        if (fade3 >= 1){
         }
     }
 }
