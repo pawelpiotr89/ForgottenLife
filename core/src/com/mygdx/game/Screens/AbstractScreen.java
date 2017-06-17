@@ -2,12 +2,17 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.ForgottenLife;
 
@@ -35,6 +40,11 @@ public abstract class AbstractScreen implements Screen {
     protected int delay = 1;
     protected float episodeButtonPositionX;
     protected float episodeButtonPositionY;
+    protected int buttonSizeWidth;
+    protected int buttonSizeHeight;
+    protected int buttonHorizontalPosition;
+    protected int buttonVerticalPosition;
+    protected int buttonFontSize;
 
     public AbstractScreen(ForgottenLife game){
         this.game = game;
@@ -42,10 +52,14 @@ public abstract class AbstractScreen implements Screen {
         stage = new Stage(new StretchViewport(ForgottenLife.WIDTH, ForgottenLife.HEIGHT, camera));
         spriteBatch = new SpriteBatch();
         Gdx.input.setInputProcessor(stage);
+
         generator = new FreeTypeFontGenerator(Gdx.files.internal("FontC.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        episodeButtonPositionX = (float) ForgottenLife.WIDTH / 2;
-        episodeButtonPositionY = (float) ForgottenLife.HEIGHT / 4;
+
+        createBasicSkin();
+
+        episodeButtonPositionX = (float) ForgottenLife.WIDTH * 0.8f;
+        episodeButtonPositionY = (float) ForgottenLife.HEIGHT * 0.05f;
     }
 
     private void createCamera() {
@@ -96,5 +110,32 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
+    }
+
+    private void createBasicSkin(){
+        buttonFontSize =  ForgottenLife.HEIGHT / 10;
+        parameter.size = buttonFontSize;
+        BitmapFont font = generator.generateFont(parameter);
+        Color fontColor = new Color((new Color(Color.rgba8888(1, 1, 1, 1))));
+        Color overFontColor = new Color((new Color(Color.rgba8888(1, 0.6f, 0, 1))));
+        skin = new Skin();
+        skin.add("default", font);
+        skin.add("fontColor", fontColor);
+        skin.add("overFontColor", overFontColor);
+
+        //Create a texture
+        Pixmap pixmap = new Pixmap(buttonSizeWidth, buttonSizeHeight, Pixmap.Format.RGB888);
+        pixmap.setColor(new Color(Color.rgba8888(1, 1, 1, 1)));
+        pixmap.fill();
+        skin.add("background",new Texture(pixmap));
+
+        //Create a button style
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = skin.getFont("default");
+        textButtonStyle.fontColor = skin.getColor("fontColor");
+        textButtonStyle.overFontColor = skin.getColor("overFontColor");
+        textButtonStyle.checkedFontColor = skin.getColor("overFontColor");
+        textButtonStyle.checkedOverFontColor = skin.getColor("overFontColor");
+        skin.add("default", textButtonStyle);
     }
 }

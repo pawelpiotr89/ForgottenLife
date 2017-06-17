@@ -2,7 +2,6 @@ package com.mygdx.game.Screens.SentencesScreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,7 +9,6 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.Screens.AbstractScreen;
@@ -69,7 +67,6 @@ public class PrologueSentence extends AbstractScreen {
 
         fadeElapsed = 0;
 
-        createBasicSkin();
         creatingButton();
     }
 
@@ -86,6 +83,10 @@ public class PrologueSentence extends AbstractScreen {
         fadeElapsed += delta / delay;
 
         drawingLeaf();
+
+        if (fade3 >= 1){
+            stage.addActor(nextSceneButton);
+        }
 
         stage.act();
         stage.draw();
@@ -136,32 +137,6 @@ public class PrologueSentence extends AbstractScreen {
         }
     }
 
-    private void createBasicSkin(){
-        parameter.size = fontSizePrologue;
-        BitmapFont font = generator.generateFont(parameter);
-        Color fontColor = new Color((new Color(Color.rgba8888(1, 1, 1, 1))));
-        Color overFontColor = new Color((new Color(Color.rgba8888(1, 0.6f, 0, 1))));
-        skin = new Skin();
-        skin.add("default", font);
-        skin.add("fontColor", fontColor);
-        skin.add("overFontColor", overFontColor);
-
-        //Create a texture
-        Pixmap pixmap = new Pixmap(200, 200, Pixmap.Format.RGB888);
-        pixmap.setColor(new Color(Color.rgba8888(1, 1, 1, 1)));
-        pixmap.fill();
-        skin.add("background",new Texture(pixmap));
-
-        //Create a button style
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = skin.getFont("default");
-        textButtonStyle.fontColor = skin.getColor("fontColor");
-        textButtonStyle.overFontColor = skin.getColor("overFontColor");
-        textButtonStyle.checkedFontColor = skin.getColor("overFontColor");
-        textButtonStyle.checkedOverFontColor = skin.getColor("overFontColor");
-        skin.add("default", textButtonStyle);
-    }
-
     private void creatingButton(){
         nextSceneButton = new TextButton ("NEXT", skin);
         nextSceneButton.setPosition(episodeButtonPositionX, episodeButtonPositionY);
@@ -171,10 +146,5 @@ public class PrologueSentence extends AbstractScreen {
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-
-        stage.addActor(nextSceneButton);
-
-        if (fade3 >= 1){
-        }
     }
 }

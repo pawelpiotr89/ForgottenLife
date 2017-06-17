@@ -2,17 +2,12 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -67,11 +62,6 @@ public class MenuScreen extends  AbstractScreen {
     private Music rainSound;
 
     private long timeOfLastDrop;
-    private int buttonSizeWidth;
-    private int buttonSizeHeight;
-    private int buttonHorizontalPosition;
-    private int buttonVerticalPosition;
-    private int fontSizeMenu;
     private int xWidth;
     private int yHight;
     private float elapsedTime = 0;
@@ -113,7 +103,6 @@ public class MenuScreen extends  AbstractScreen {
         yHight = 350;
 
         settingButtons();
-        createBasicSkin();
         createStartButton();
         createOptionsButton();
         createExitButton();
@@ -184,31 +173,6 @@ public class MenuScreen extends  AbstractScreen {
         rainSound.dispose();
     }
 
-    private void createBasicSkin(){
-        parameter.size = fontSizeMenu;
-        BitmapFont font = generator.generateFont(parameter);
-        Color fontColor = new Color((new Color(Color.rgba8888(1, 1, 1, 1))));
-        Color overFontColor = new Color((new Color(Color.rgba8888(1, 0.6f, 0, 1))));
-        skin = new Skin();
-        skin.add("default", font);
-        skin.add("fontColor", fontColor);
-        skin.add("overFontColor", overFontColor);
-
-        //Create a texture
-        Pixmap pixmap = new Pixmap(buttonSizeWidth, buttonSizeHeight, Pixmap.Format.RGB888);
-        pixmap.setColor(new Color(Color.rgba8888(1, 1, 1, 1)));
-        pixmap.fill();
-        skin.add("background",new Texture(pixmap));
-
-        //Create a button style
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = skin.getFont("default");
-        textButtonStyle.fontColor = skin.getColor("fontColor");
-        textButtonStyle.overFontColor = skin.getColor("overFontColor");
-        textButtonStyle.checkedFontColor = skin.getColor("overFontColor");
-        textButtonStyle.checkedOverFontColor = skin.getColor("overFontColor");
-        skin.add("default", textButtonStyle);
-    }
 
     private void makingFirstCloud(){
         firstCloud.x = -550;
@@ -426,7 +390,6 @@ public class MenuScreen extends  AbstractScreen {
         buttonSizeHeight = ForgottenLife.HEIGHT / 10;
         buttonHorizontalPosition = (ForgottenLife.WIDTH / 2) - (buttonSizeWidth / 2);
         buttonVerticalPosition = (ForgottenLife.HEIGHT / 2) - (buttonSizeHeight / 2);
-        fontSizeMenu = ForgottenLife.HEIGHT / 10;
     }
 
     private void createStartButton() {
