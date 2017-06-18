@@ -72,6 +72,7 @@ public class MenuScreen extends  AbstractScreen {
     private int xWidth;
     private int yHight;
     private float elapsedTime = 0;
+    private boolean birdAction = true;
 
     MenuScreen(ForgottenLife game) {
         super(game);
@@ -97,7 +98,7 @@ public class MenuScreen extends  AbstractScreen {
         bird5 = new Texture(Gdx.files.internal("birdFrame_5.png"));
 
         waveAnimation = new Animation(0.1f, waveBackground1, waveBackground2, waveBackground3, waveBackground4);
-        birdAnimation = new Animation(0.2f, bird1, bird2, bird3, bird4, bird5);
+        birdAnimation = new Animation(0.175f, bird1, bird2, bird3, bird4, bird3, bird5, bird2);
 
         rainSound = Gdx.audio.newMusic(Gdx.files.internal("menuRain.mp3"));
 
@@ -136,7 +137,7 @@ public class MenuScreen extends  AbstractScreen {
         spriteBatch.begin();
         spriteBatch.draw(menuBackground, 0, 0);
         spriteBatch.draw((Texture) waveAnimation.getKeyFrame(elapsedTime, true), 0, 0);
-        spriteBatch.draw((Texture) birdAnimation.getKeyFrame(elapsedTime, true), ForgottenLife.WIDTH / 4, ForgottenLife.HEIGHT / 2 + ForgottenLife.HEIGHT / 4);
+        spriteBatch.draw((Texture) birdAnimation.getKeyFrame(elapsedTime, birdAction), ForgottenLife.WIDTH / 4, ForgottenLife.HEIGHT / 2 + ForgottenLife.HEIGHT / 4);
         drawingDrops();
         drawingDropsBackground();
         drawingDropsFarBackground();
