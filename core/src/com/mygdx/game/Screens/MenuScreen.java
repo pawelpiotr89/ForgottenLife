@@ -42,7 +42,14 @@ public class MenuScreen extends  AbstractScreen {
     private Texture waveBackground3;
     private Texture waveBackground4;
 
+    private Texture bird1;
+    private Texture bird2;
+    private Texture bird3;
+    private Texture bird4;
+    private Texture bird5;
+
     private Animation waveAnimation;
+    private Animation birdAnimation;
 
     private Array<Rectangle> drops;
     private Array<Rectangle> dropsBackground;
@@ -83,8 +90,14 @@ public class MenuScreen extends  AbstractScreen {
         waveBackground2 = new Texture(Gdx.files.internal("waveBackground2.png"));
         waveBackground3 = new Texture(Gdx.files.internal("waveBackground3.png"));
         waveBackground4 = new Texture(Gdx.files.internal("waveBackground4.png"));
+        bird1 = new Texture(Gdx.files.internal("birdFrame_1.png"));
+        bird2 = new Texture(Gdx.files.internal("birdFrame_2.png"));
+        bird3 = new Texture(Gdx.files.internal("birdFrame_3.png"));
+        bird4 = new Texture(Gdx.files.internal("birdFrame_4.png"));
+        bird5 = new Texture(Gdx.files.internal("birdFrame_5.png"));
 
         waveAnimation = new Animation(0.1f, waveBackground1, waveBackground2, waveBackground3, waveBackground4);
+        birdAnimation = new Animation(0.2f, bird1, bird2, bird3, bird4, bird5);
 
         rainSound = Gdx.audio.newMusic(Gdx.files.internal("menuRain.mp3"));
 
@@ -123,6 +136,7 @@ public class MenuScreen extends  AbstractScreen {
         spriteBatch.begin();
         spriteBatch.draw(menuBackground, 0, 0);
         spriteBatch.draw((Texture) waveAnimation.getKeyFrame(elapsedTime, true), 0, 0);
+        spriteBatch.draw((Texture) birdAnimation.getKeyFrame(elapsedTime, true), ForgottenLife.WIDTH / 4, ForgottenLife.HEIGHT / 2 + ForgottenLife.HEIGHT / 4);
         drawingDrops();
         drawingDropsBackground();
         drawingDropsFarBackground();
