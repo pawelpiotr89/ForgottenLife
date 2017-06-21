@@ -15,9 +15,6 @@ import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.Screens.OptionsScreen.OptionsScreen;
 import com.mygdx.game.Screens.SentencesScreens.PrologueSentence;
 
-
-import org.w3c.dom.css.Rect;
-
 import java.util.Iterator;
 
 
@@ -73,6 +70,9 @@ public class MenuScreen extends  AbstractScreen {
     private int yHight;
     private float elapsedTime = 0;
     private boolean birdAction = true;
+    private int birdPositionX;
+    private int birdPositionY;
+    private int currentFrame;
 
     MenuScreen(ForgottenLife game) {
         super(game);
@@ -116,16 +116,23 @@ public class MenuScreen extends  AbstractScreen {
         xWidth = 560;
         yHight = 350;
 
+        birdPositionX = MathUtils.random(100, 1820);
+        birdPositionY = MathUtils.random(630, 810);
+
         settingButtons();
         createStartButton();
         createOptionsButton();
         createExitButton();
+
         makingFirstCloud();
         makingSecondCloud();
         makingThirdCloud();
         makingFourthCloud();
         makingFifthCloud();
         makingSixthCloud();
+
+        movingBird();
+
         rainSound.setLooping(true);
         rainSound.setVolume(0.3f);
         rainSound.play();
@@ -137,7 +144,7 @@ public class MenuScreen extends  AbstractScreen {
         spriteBatch.begin();
         spriteBatch.draw(menuBackground, 0, 0);
         spriteBatch.draw((Texture) waveAnimation.getKeyFrame(elapsedTime, true), 0, 0);
-        spriteBatch.draw((Texture) birdAnimation.getKeyFrame(elapsedTime, birdAction), ForgottenLife.WIDTH / 4, ForgottenLife.HEIGHT / 2 + ForgottenLife.HEIGHT / 4);
+        spriteBatch.draw((Texture) birdAnimation.getKeyFrame(elapsedTime, birdAction), birdPositionX, birdPositionY);
         drawingDrops();
         drawingDropsBackground();
         drawingDropsFarBackground();
@@ -188,6 +195,8 @@ public class MenuScreen extends  AbstractScreen {
         rainSound.dispose();
     }
 
+    private void movingBird() {
+    }
 
     private void makingFirstCloud(){
         firstCloud.x = -550;
