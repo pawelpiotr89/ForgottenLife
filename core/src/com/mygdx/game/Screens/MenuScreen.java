@@ -22,7 +22,7 @@ import java.util.Iterator;
  * Created by Roxven89 on 23.05.2017.
  */
 
-public class MenuScreen extends  AbstractScreen {
+public class MenuScreen extends AbstractScreen {
 
     private Texture menuBackground;
     private Texture dropImage;
@@ -116,7 +116,7 @@ public class MenuScreen extends  AbstractScreen {
         xWidth = 560;
         yHight = 350;
 
-        birdPositionX = MathUtils.random(100, 1820);
+        birdPositionX = MathUtils.random(50, 1870);
         birdPositionY = MathUtils.random(630, 810);
 
         settingButtons();
@@ -131,15 +131,13 @@ public class MenuScreen extends  AbstractScreen {
         makingFifthCloud();
         makingSixthCloud();
 
-        movingBird();
-
         rainSound.setLooping(true);
         rainSound.setVolume(0.3f);
         rainSound.play();
     }
 
     @Override
-    public void render(float delta){
+    public void render(float delta) {
         super.render(delta);
         spriteBatch.begin();
         spriteBatch.draw(menuBackground, 0, 0);
@@ -176,7 +174,7 @@ public class MenuScreen extends  AbstractScreen {
     }
 
     @Override
-    public void dispose(){
+    public void dispose() {
         super.dispose();
         menuBackground.dispose();
         dropImage.dispose();
@@ -195,136 +193,133 @@ public class MenuScreen extends  AbstractScreen {
         rainSound.dispose();
     }
 
-    private void movingBird() {
-    }
-
-    private void makingFirstCloud(){
+    private void makingFirstCloud() {
         firstCloud.x = -550;
         firstCloud.y = 850;
         firstCloud.width = xWidth;
         firstCloud.height = yHight;
     }
 
-    private void makingSecondCloud(){
+    private void makingSecondCloud() {
         secondCloud.x = -100;
         secondCloud.y = 850;
         secondCloud.width = xWidth;
         secondCloud.height = yHight;
     }
 
-    private void makingThirdCloud(){
+    private void makingThirdCloud() {
         thirdCloud.x = 300;
         thirdCloud.y = 850;
         thirdCloud.width = xWidth;
         thirdCloud.height = yHight;
     }
 
-    private void makingFourthCloud(){
+    private void makingFourthCloud() {
         fourthCloud.x = 700;
         fourthCloud.y = 850;
         fourthCloud.width = xWidth;
         fourthCloud.height = yHight;
     }
 
-    private void makingFifthCloud(){
+    private void makingFifthCloud() {
         fifthCloud.x = 1100;
         fifthCloud.y = 850;
         fifthCloud.width = xWidth;
         fifthCloud.height = yHight;
     }
 
-    private void makingSixthCloud(){
+    private void makingSixthCloud() {
         sixthCloud.x = 1500;
         sixthCloud.y = 850;
         sixthCloud.width = xWidth;
         sixthCloud.height = yHight;
     }
 
-    private void drawingFirstCloud(){
+    private void drawingFirstCloud() {
         spriteBatch.draw(cloud1, firstCloud.x, firstCloud.y, xWidth, yHight);
 
     }
 
-    private void drawingSecondCloud(){
+    private void drawingSecondCloud() {
         spriteBatch.draw(cloud2, secondCloud.x, secondCloud.y, xWidth, yHight);
     }
 
-    private void drawingThirdCloud(){
+    private void drawingThirdCloud() {
         spriteBatch.draw(cloud3, thirdCloud.x, thirdCloud.y, xWidth, yHight);
     }
 
-    private void drawingFourthCloud(){
+    private void drawingFourthCloud() {
         spriteBatch.draw(cloud4, fourthCloud.x, fourthCloud.y, xWidth, yHight);
     }
 
-    private void drawingFifthCloud(){
+    private void drawingFifthCloud() {
         spriteBatch.draw(cloud5, fifthCloud.x, fifthCloud.y, xWidth, yHight);
     }
 
-    private void drawingSixthCloud(){
+    private void drawingSixthCloud() {
         spriteBatch.draw(cloud6, sixthCloud.x, sixthCloud.y, xWidth, yHight);
     }
 
-    private void movingFirstCloud(){
-        if(firstCloud.x < 1920) {
+    private void movingFirstCloud() {
+        if (firstCloud.x < 1920) {
             firstCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
-        if(firstCloud.x > 1920){
+        if (firstCloud.x > 1920) {
             firstCloud.x = -550;
         }
     }
 
-    private void movingSecondCloud(){
-        if(secondCloud.x < 1920) {
+    private void movingSecondCloud() {
+        if (secondCloud.x < 1920) {
             secondCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
-        if(secondCloud.x > 1920){
+        if (secondCloud.x > 1920) {
             secondCloud.x = -550;
         }
     }
 
-    private void movingThirdCloud(){
-        if(thirdCloud.x < 1920) {
+    private void movingThirdCloud() {
+        if (thirdCloud.x < 1920) {
             thirdCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
-        if(thirdCloud.x > 1920){
+        if (thirdCloud.x > 1920) {
             thirdCloud.x = -550;
         }
     }
 
-    private void movingFourthCloud(){
-        if(fourthCloud.x < 1920) {
+    private void movingFourthCloud() {
+        if (fourthCloud.x < 1920) {
             fourthCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
-        if(fourthCloud.x > 1920){
+        if (fourthCloud.x > 1920) {
             fourthCloud.x = -550;
         }
     }
 
-    private void movingFifthCloud(){
-        if(fifthCloud.x < 1920) {
+    private void movingFifthCloud() {
+        if (fifthCloud.x < 1920) {
             fifthCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
-        if(fifthCloud.x > 1920){
+        if (fifthCloud.x > 1920) {
             fifthCloud.x = -550;
         }
     }
 
-    private void movingSixthCloud(){
-        if(sixthCloud.x < 1920) {
+    private void movingSixthCloud() {
+        if (sixthCloud.x < 1920) {
             sixthCloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
-        if(sixthCloud.x > 1920){
+        if (sixthCloud.x > 1920) {
             sixthCloud.x = -550;
         }
     }
 
     private void makingRain() {
         int n = 0;
-        while(n < 25){
+        while (n < 25) {
             Rectangle dropp = new Rectangle();
             dropp.x = MathUtils.random(-580, 1920 - 16);
-            dropp.y = MathUtils.random(990,1000);
+            dropp.y = MathUtils.random(990, 1000);
             dropp.width = 8;
             dropp.height = 8;
             drops.add(dropp);
@@ -335,10 +330,10 @@ public class MenuScreen extends  AbstractScreen {
 
     private void makingRainBackground() {
         int n = 0;
-        while(n < 15){
+        while (n < 15) {
             Rectangle dropp2 = new Rectangle();
             dropp2.x = MathUtils.random(-580, 1920 - 16);
-            dropp2.y = MathUtils.random(990,1000);
+            dropp2.y = MathUtils.random(990, 1000);
             dropp2.width = 4;
             dropp2.height = 4;
             dropsBackground.add(dropp2);
@@ -349,10 +344,10 @@ public class MenuScreen extends  AbstractScreen {
 
     private void makingRainFarBackground() {
         int n = 0;
-        while(n < 15){
+        while (n < 15) {
             Rectangle dropp3 = new Rectangle();
             dropp3.x = MathUtils.random(0, 1920 + 580);
-            dropp3.y = MathUtils.random(990,1000);
+            dropp3.y = MathUtils.random(990, 1000);
             dropp3.width = 2;
             dropp3.height = 2;
             dropsFarBackground.add(dropp3);
@@ -368,44 +363,44 @@ public class MenuScreen extends  AbstractScreen {
     }
 
     private void drawingDropsBackground() {
-        for(Rectangle dropp2: dropsBackground) {
+        for (Rectangle dropp2 : dropsBackground) {
             spriteBatch.draw(dropImage3, dropp2.x, dropp2.y);
         }
     }
 
     private void drawingDropsFarBackground() {
-        for(Rectangle dropp3: dropsFarBackground) {
+        for (Rectangle dropp3 : dropsFarBackground) {
             spriteBatch.draw(dropImage2, dropp3.x, dropp3.y);
         }
     }
 
     private void removingDrops() {
         Iterator<Rectangle> iter = drops.iterator();
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             Rectangle dropp = iter.next();
             dropp.x += 500 * Gdx.graphics.getDeltaTime();
             dropp.y -= 981 * Gdx.graphics.getDeltaTime();
-            if(dropp.y + 64 < 0) iter.remove();
+            if (dropp.y + 64 < 0) iter.remove();
         }
     }
 
     private void removingDropsBackground() {
         Iterator<Rectangle> iter = dropsBackground.iterator();
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             Rectangle dropp2 = iter.next();
             dropp2.x += 1 * Gdx.graphics.getDeltaTime();
             dropp2.y -= 1081 * Gdx.graphics.getDeltaTime();
-            if(dropp2.y + 64 < MathUtils.random(0,450)) iter.remove();
+            if (dropp2.y + 64 < MathUtils.random(0, 450)) iter.remove();
         }
     }
 
     private void removingDropsFarBackground() {
         Iterator<Rectangle> iter = dropsFarBackground.iterator();
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             Rectangle dropp3 = iter.next();
             dropp3.x -= 450 * Gdx.graphics.getDeltaTime();
             dropp3.y -= 1281 * Gdx.graphics.getDeltaTime();
-            if(dropp3.y + 64 < MathUtils.random(0,750)) iter.remove();
+            if (dropp3.y + 64 < MathUtils.random(0, 750)) iter.remove();
         }
     }
 
@@ -419,41 +414,41 @@ public class MenuScreen extends  AbstractScreen {
     private void createStartButton() {
         startGameButton = new TextButton("START GAME", skin);
         startGameButton.setPosition(buttonHorizontalPosition, buttonVerticalPosition + ForgottenLife.HEIGHT / 4);
-        startGameButton.addListener(new InputListener(){
-                                        @Override
-                                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                            rainSound.stop();
-                                            game.setScreen(new PrologueSentence(game));
-                                            return super.touchDown(event, x, y, pointer, button);
-                                        }
-                                    });
+        startGameButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                rainSound.stop();
+                game.setScreen(new PrologueSentence(game));
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
         stage.addActor(startGameButton);
     }
 
     private void createOptionsButton() {
         optionsButton = new TextButton("OPTIONS", skin);
         optionsButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 10), buttonVerticalPosition + ForgottenLife.HEIGHT / 20);
-        optionsButton.addListener(new InputListener(){
-                                        @Override
-                                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                            game.setScreen(new OptionsScreen(game));
-                                            return super.touchDown(event, x, y, pointer, button);
-                                        }
-                                    });
+        optionsButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new OptionsScreen(game));
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
         stage.addActor(optionsButton);
     }
 
     private void createExitButton() {
         exitGameButton = new TextButton("EXIT", skin);
         exitGameButton.setPosition(buttonHorizontalPosition + (buttonSizeWidth / 3), buttonVerticalPosition - ForgottenLife.HEIGHT / 6);
-        exitGameButton.addListener(new InputListener(){
-                                       @Override
-                                       public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                           rainSound.stop();
-                                           Gdx.app.exit();
-                                           return super.touchDown(event, x, y, pointer, button);
-                                       }
-                                   });
+        exitGameButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                rainSound.stop();
+                Gdx.app.exit();
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
         stage.addActor(exitGameButton);
     }
 }
