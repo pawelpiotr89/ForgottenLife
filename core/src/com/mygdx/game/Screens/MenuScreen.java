@@ -72,7 +72,7 @@ public class MenuScreen extends AbstractScreen {
     private boolean birdAction = true;
     private int birdPositionX;
     private int birdPositionY;
-    private int currentFrame;
+    private float showMenuTime;
 
     MenuScreen(ForgottenLife game) {
         super(game);
@@ -115,6 +115,7 @@ public class MenuScreen extends AbstractScreen {
 
         xWidth = 560;
         yHight = 350;
+        showMenuTime = 4f;
 
         birdPositionX = MathUtils.random(50, 1870);
         birdPositionY = MathUtils.random(630, 810);
@@ -132,45 +133,49 @@ public class MenuScreen extends AbstractScreen {
         makingSixthCloud();
 
         rainSound.setLooping(true);
-        rainSound.setVolume(0.3f);
+        rainSound.setVolume(0f);
         rainSound.play();
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        spriteBatch.begin();
-        spriteBatch.draw(menuBackground, 0, 0);
-        spriteBatch.draw((Texture) waveAnimation.getKeyFrame(elapsedTime, true), 0, 0);
-        spriteBatch.draw((Texture) birdAnimation.getKeyFrame(elapsedTime, birdAction), birdPositionX, birdPositionY);
-        drawingDrops();
-        drawingDropsBackground();
-        drawingDropsFarBackground();
-        drawingFirstCloud();
-        drawingFifthCloud();
-        drawingThirdCloud();
-        drawingSixthCloud();
-        drawingSecondCloud();
-        drawingFourthCloud();
-        spriteBatch.end();
+        if(elapsedTime > showMenuTime) {
+            spriteBatch.begin();
+            spriteBatch.draw(menuBackground, 0, 0);
+            spriteBatch.draw((Texture) waveAnimation.getKeyFrame(elapsedTime, true), 0, 0);
+            spriteBatch.draw((Texture) birdAnimation.getKeyFrame(elapsedTime, birdAction), birdPositionX, birdPositionY);
+            drawingDrops();
+            drawingDropsBackground();
+            drawingDropsFarBackground();
+            drawingFirstCloud();
+            drawingFifthCloud();
+            drawingThirdCloud();
+            drawingSixthCloud();
+            drawingSecondCloud();
+            drawingFourthCloud();
+            spriteBatch.end();
+
+            stage.act();
+            stage.draw();
+
+            makingRain();
+            makingRainBackground();
+            makingRainFarBackground();
+            removingDrops();
+            removingDropsBackground();
+            removingDropsFarBackground();
+            movingFirstCloud();
+            movingSecondCloud();
+            movingThirdCloud();
+            movingFourthCloud();
+            movingFifthCloud();
+            movingSixthCloud();
+
+            rainSound.setVolume(0.3f);
+        }
 
         elapsedTime += Gdx.graphics.getDeltaTime();
-
-        stage.act();
-        stage.draw();
-
-        makingRain();
-        makingRainBackground();
-        makingRainFarBackground();
-        removingDrops();
-        removingDropsBackground();
-        removingDropsFarBackground();
-        movingFirstCloud();
-        movingSecondCloud();
-        movingThirdCloud();
-        movingFourthCloud();
-        movingFifthCloud();
-        movingSixthCloud();
     }
 
     @Override
