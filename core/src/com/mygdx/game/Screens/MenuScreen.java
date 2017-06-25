@@ -418,6 +418,7 @@ public class MenuScreen extends AbstractScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 rainSound.stop();
+                dispose();
                 game.setScreen(new PrologueSentence(game));
                 return super.touchDown(event, x, y, pointer, button);
             }

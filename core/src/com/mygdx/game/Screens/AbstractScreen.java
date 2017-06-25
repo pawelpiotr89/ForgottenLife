@@ -37,7 +37,7 @@ public abstract class AbstractScreen implements Screen {
     protected float SUBTITLE_FADE_DELAY;
     protected float MORE_SUBTITLE_FADE_DELAY;
     protected float fadeElapsed;
-    protected int delay = 1;
+    protected int delay = 10;
     protected float episodeButtonPositionX;
     protected float episodeButtonPositionY;
     protected int buttonSizeWidth;

@@ -161,6 +161,7 @@ public class IntroScreen extends AbstractScreen{
             animationAction = false;
 
             if(passingTime > period) {
+                dispose();
                 game.setScreen(new MenuScreen(game));
             }
         }
