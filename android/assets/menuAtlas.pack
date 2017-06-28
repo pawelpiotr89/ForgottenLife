@@ -1,0 +1,103 @@
+
+menuAtlas.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+cloud5
+  rotate: false
+  xy: 1, 638
+  size: 843, 360
+  orig: 843, 360
+  offset: 0, 0
+  index: -1
+cloud2
+  rotate: false
+  xy: 1, 337
+  size: 770, 299
+  orig: 770, 299
+  offset: 0, 0
+  index: -1
+cloud3
+  rotate: false
+  xy: 846, 699
+  size: 770, 299
+  orig: 770, 299
+  offset: 0, 0
+  index: -1
+cloud1
+  rotate: false
+  xy: 1, 15
+  size: 695, 320
+  orig: 695, 320
+  offset: 0, 0
+  index: -1
+cloud6
+  rotate: false
+  xy: 846, 377
+  size: 695, 320
+  orig: 695, 320
+  offset: 0, 0
+  index: -1
+cloud4
+  rotate: false
+  xy: 773, 70
+  size: 670, 305
+  orig: 670, 305
+  offset: 0, 0
+  index: -1
+birdFrame1
+  rotate: false
+  xy: 1618, 986
+  size: 16, 12
+  orig: 16, 12
+  offset: 0, 0
+  index: -1
+birdFrame2
+  rotate: false
+  xy: 1, 1
+  size: 16, 12
+  orig: 16, 12
+  offset: 0, 0
+  index: -1
+birdFrame3
+  rotate: false
+  xy: 1543, 685
+  size: 16, 12
+  orig: 16, 12
+  offset: 0, 0
+  index: -1
+birdFrame4
+  rotate: false
+  xy: 698, 323
+  size: 16, 12
+  orig: 16, 12
+  offset: 0, 0
+  index: -1
+birdFrame5
+  rotate: false
+  xy: 1445, 363
+  size: 16, 12
+  orig: 16, 12
+  offset: 0, 0
+  index: -1
+drop1
+  rotate: false
+  xy: 773, 628
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+drop2
+  rotate: false
+  xy: 1618, 976
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+drop3
+  rotate: false
+  xy: 1636, 990
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1

@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -24,6 +26,8 @@ import java.util.Iterator;
 
 public class MenuScreen extends AbstractScreen {
 
+    private TextureAtlas birdAtlas;
+
     private Texture menuBackground;
     private Texture dropImage;
     private Texture dropImage2;
@@ -38,12 +42,6 @@ public class MenuScreen extends AbstractScreen {
     private Texture waveBackground2;
     private Texture waveBackground3;
     private Texture waveBackground4;
-
-    private Texture bird1;
-    private Texture bird2;
-    private Texture bird3;
-    private Texture bird4;
-    private Texture bird5;
 
     private Animation waveAnimation;
     private Animation birdAnimation;
@@ -77,6 +75,8 @@ public class MenuScreen extends AbstractScreen {
     MenuScreen(ForgottenLife game) {
         super(game);
 
+        birdAtlas = new TextureAtlas(Gdx.files.internal("bird.pack"));
+
         menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
         dropImage = new Texture(Gdx.files.internal("drop1.png"));
         dropImage2 = new Texture(Gdx.files.internal("drop2.png"));
@@ -91,14 +91,10 @@ public class MenuScreen extends AbstractScreen {
         waveBackground2 = new Texture(Gdx.files.internal("waveBackground2.png"));
         waveBackground3 = new Texture(Gdx.files.internal("waveBackground3.png"));
         waveBackground4 = new Texture(Gdx.files.internal("waveBackground4.png"));
-        bird1 = new Texture(Gdx.files.internal("birdFrame_1.png"));
-        bird2 = new Texture(Gdx.files.internal("birdFrame_2.png"));
-        bird3 = new Texture(Gdx.files.internal("birdFrame_3.png"));
-        bird4 = new Texture(Gdx.files.internal("birdFrame_4.png"));
-        bird5 = new Texture(Gdx.files.internal("birdFrame_5.png"));
+
 
         waveAnimation = new Animation(0.1f, waveBackground1, waveBackground2, waveBackground3, waveBackground4);
-        birdAnimation = new Animation(0.175f, bird1, bird2, bird3, bird4, bird3, bird5, bird2);
+        birdAnimation = new Animation(0.175f, birdAtlas.getRegions());
 
         rainSound = Gdx.audio.newMusic(Gdx.files.internal("menuRain.mp3"));
 
@@ -144,7 +140,7 @@ public class MenuScreen extends AbstractScreen {
             spriteBatch.begin();
             spriteBatch.draw(menuBackground, 0, 0);
             spriteBatch.draw((Texture) waveAnimation.getKeyFrame(elapsedTime, true), 0, 0);
-            spriteBatch.draw((Texture) birdAnimation.getKeyFrame(elapsedTime, birdAction), birdPositionX, birdPositionY);
+            spriteBatch.draw((TextureRegion) birdAnimation.getKeyFrame(elapsedTime, birdAction), birdPositionX, birdPositionY);
             drawingDrops();
             drawingDropsBackground();
             drawingDropsFarBackground();
