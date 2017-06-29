@@ -27,17 +27,9 @@ import java.util.Iterator;
 public class MenuScreen extends AbstractScreen {
 
     private TextureAtlas birdAtlas;
+    private TextureAtlas cloudDropAtlas;
 
     private Texture menuBackground;
-    private Texture dropImage;
-    private Texture dropImage2;
-    private Texture dropImage3;
-    private Texture cloud1;
-    private Texture cloud2;
-    private Texture cloud3;
-    private Texture cloud4;
-    private Texture cloud5;
-    private Texture cloud6;
     private Texture waveBackground1;
     private Texture waveBackground2;
     private Texture waveBackground3;
@@ -76,17 +68,9 @@ public class MenuScreen extends AbstractScreen {
         super(game);
 
         birdAtlas = new TextureAtlas(Gdx.files.internal("bird.pack"));
+        cloudDropAtlas = new TextureAtlas(Gdx.files.internal("cloudsDrops.pack"));
 
         menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
-        dropImage = new Texture(Gdx.files.internal("drop1.png"));
-        dropImage2 = new Texture(Gdx.files.internal("drop2.png"));
-        dropImage3 = new Texture(Gdx.files.internal("drop3.png"));
-        cloud1 = new Texture(Gdx.files.internal("cloud1.png"));
-        cloud2 = new Texture(Gdx.files.internal("cloud2.png"));
-        cloud3 = new Texture(Gdx.files.internal("cloud6.png"));
-        cloud4 = new Texture(Gdx.files.internal("cloud4.png"));
-        cloud5 = new Texture(Gdx.files.internal("cloud5.png"));
-        cloud6 = new Texture(Gdx.files.internal("cloud3.png"));
         waveBackground1 = new Texture(Gdx.files.internal("waveBackground1.png"));
         waveBackground2 = new Texture(Gdx.files.internal("waveBackground2.png"));
         waveBackground3 = new Texture(Gdx.files.internal("waveBackground3.png"));
@@ -141,15 +125,8 @@ public class MenuScreen extends AbstractScreen {
             spriteBatch.draw(menuBackground, 0, 0);
             spriteBatch.draw((Texture) waveAnimation.getKeyFrame(elapsedTime, true), 0, 0);
             spriteBatch.draw((TextureRegion) birdAnimation.getKeyFrame(elapsedTime, birdAction), birdPositionX, birdPositionY);
-            drawingDrops();
-            drawingDropsBackground();
-            drawingDropsFarBackground();
-            drawingFirstCloud();
-            drawingFifthCloud();
-            drawingThirdCloud();
-            drawingSixthCloud();
-            drawingSecondCloud();
-            drawingFourthCloud();
+            drawingAllDrops();
+            makingAllClouds();
             spriteBatch.end();
 
             stage.act();
@@ -177,21 +154,29 @@ public class MenuScreen extends AbstractScreen {
     @Override
     public void dispose() {
         super.dispose();
+        birdAtlas.dispose();
+        cloudDropAtlas.dispose();
         menuBackground.dispose();
-        dropImage.dispose();
-        dropImage2.dispose();
-        dropImage3.dispose();
-        cloud1.dispose();
-        cloud2.dispose();
-        cloud3.dispose();
-        cloud4.dispose();
-        cloud5.dispose();
-        cloud6.dispose();
         waveBackground1.dispose();
         waveBackground2.dispose();
         waveBackground3.dispose();
         waveBackground4.dispose();
         rainSound.dispose();
+    }
+
+    private void drawingAllDrops(){
+        drawingDrops();
+        drawingDropsBackground();
+        drawingDropsFarBackground();
+    }
+
+    private void makingAllClouds(){
+        drawingFirstCloud();
+        drawingFifthCloud();
+        drawingThirdCloud();
+        drawingSixthCloud();
+        drawingSecondCloud();
+        drawingFourthCloud();
     }
 
     private void makingFirstCloud() {
@@ -237,28 +222,28 @@ public class MenuScreen extends AbstractScreen {
     }
 
     private void drawingFirstCloud() {
-        spriteBatch.draw(cloud1, firstCloud.x, firstCloud.y, xWidth, yHight);
+        spriteBatch.draw(cloudDropAtlas.findRegion("cloud1"), firstCloud.x, firstCloud.y, xWidth, yHight);
 
     }
 
     private void drawingSecondCloud() {
-        spriteBatch.draw(cloud2, secondCloud.x, secondCloud.y, xWidth, yHight);
+        spriteBatch.draw(cloudDropAtlas.findRegion("cloud2"), secondCloud.x, secondCloud.y, xWidth, yHight);
     }
 
     private void drawingThirdCloud() {
-        spriteBatch.draw(cloud3, thirdCloud.x, thirdCloud.y, xWidth, yHight);
+        spriteBatch.draw(cloudDropAtlas.findRegion("cloud6"), thirdCloud.x, thirdCloud.y, xWidth, yHight);
     }
 
     private void drawingFourthCloud() {
-        spriteBatch.draw(cloud4, fourthCloud.x, fourthCloud.y, xWidth, yHight);
+        spriteBatch.draw(cloudDropAtlas.findRegion("cloud4"), fourthCloud.x, fourthCloud.y, xWidth, yHight);
     }
 
     private void drawingFifthCloud() {
-        spriteBatch.draw(cloud5, fifthCloud.x, fifthCloud.y, xWidth, yHight);
+        spriteBatch.draw(cloudDropAtlas.findRegion("cloud5"), fifthCloud.x, fifthCloud.y, xWidth, yHight);
     }
 
     private void drawingSixthCloud() {
-        spriteBatch.draw(cloud6, sixthCloud.x, sixthCloud.y, xWidth, yHight);
+        spriteBatch.draw(cloudDropAtlas.findRegion("cloud3"), sixthCloud.x, sixthCloud.y, xWidth, yHight);
     }
 
     private void movingFirstCloud() {
@@ -359,19 +344,19 @@ public class MenuScreen extends AbstractScreen {
 
     private void drawingDrops() {
         for (Rectangle dropp : drops) {
-            spriteBatch.draw(dropImage, dropp.x, dropp.y);
+            spriteBatch.draw(cloudDropAtlas.findRegion("drop1"), dropp.x, dropp.y);
         }
     }
 
     private void drawingDropsBackground() {
         for (Rectangle dropp2 : dropsBackground) {
-            spriteBatch.draw(dropImage3, dropp2.x, dropp2.y);
+            spriteBatch.draw(cloudDropAtlas.findRegion("drop2"), dropp2.x, dropp2.y);
         }
     }
 
     private void drawingDropsFarBackground() {
         for (Rectangle dropp3 : dropsFarBackground) {
-            spriteBatch.draw(dropImage2, dropp3.x, dropp3.y);
+            spriteBatch.draw(cloudDropAtlas.findRegion("drop3"), dropp3.x, dropp3.y);
         }
     }
 
