@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
@@ -48,13 +49,12 @@ public class IntroScreen extends AbstractScreen{
         positionY = 580;
         animationAction = true;
         passingTime = 0f;
-        period = 24f;
+        period = 25f;
 
-        runningLogo = new TextureAtlas(Gdx.files.internal("intro/runningLogo.pack"));
-
-        logo = new Texture(Gdx.files.internal("intro/logo.png"));
-
+        runningLogo = gameAssets.get(gameAssets.runningLogoPath, TextureAtlas.class);
+        logo = gameAssets.get(gameAssets.logoPath, Texture.class);
         runnerAnimation = new Animation(0.1f, runningLogo.getRegions());
+
     }
 
     @Override
@@ -73,10 +73,10 @@ public class IntroScreen extends AbstractScreen{
 
             goToMenuScreen();
             movingRunner();
-            calculatingTime();
 
             fadeElapsed += delta / delay;
             elapsedTime += Gdx.graphics.getDeltaTime();
+            calculatingTime();
     }
 
     @Override

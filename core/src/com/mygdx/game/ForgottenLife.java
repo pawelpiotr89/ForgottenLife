@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.mygdx.game.Screens.IntroScreen;
+import com.mygdx.game.Screens.SentencesScreens.LoadingIntro;
 
 public class ForgottenLife extends Game {
 
@@ -15,7 +16,7 @@ public class ForgottenLife extends Game {
 
 	@Override
 	public void create () {
-		this.setScreen(new IntroScreen(this));
+		this.setScreen(new LoadingIntro(this));
 	}
 
 	public boolean isPaused() {

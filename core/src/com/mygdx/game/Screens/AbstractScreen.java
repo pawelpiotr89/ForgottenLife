@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.ForgottenLife;
+import com.mygdx.game.GameAssets;
 
 /**
  * Created by Roxven89 on 21.05.2017.
@@ -23,6 +24,7 @@ import com.mygdx.game.ForgottenLife;
 public abstract class AbstractScreen implements Screen {
 
     protected ForgottenLife game;
+    protected GameAssets gameAssets;
 
     protected Stage stage;
     private OrthographicCamera camera;
@@ -52,6 +54,8 @@ public abstract class AbstractScreen implements Screen {
         stage = new Stage(new StretchViewport(ForgottenLife.WIDTH, ForgottenLife.HEIGHT, camera));
         spriteBatch = new SpriteBatch();
         Gdx.input.setInputProcessor(stage);
+
+        gameAssets = new GameAssets();
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("game/FontC.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
