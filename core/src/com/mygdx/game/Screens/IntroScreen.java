@@ -48,7 +48,7 @@ public class IntroScreen extends AbstractScreen{
         positionY = 580;
         animationAction = true;
         passingTime = 0f;
-        period = 1f;
+        period = 24f;
 
         runningLogo = new TextureAtlas(Gdx.files.internal("intro/runningLogo.pack"));
 
@@ -62,7 +62,11 @@ public class IntroScreen extends AbstractScreen{
         super.render(delta);
 
             spriteBatch.begin();
-            spriteBatch.draw((TextureRegion) runnerAnimation.getKeyFrame(elapsedTime, animationAction), positionX, positionY);
+
+            if(animationAction == true){
+                spriteBatch.draw((TextureRegion) runnerAnimation.getKeyFrame(elapsedTime, animationAction), positionX, positionY);
+            }
+
             drawingText();
             drawingLogo();
             spriteBatch.end();

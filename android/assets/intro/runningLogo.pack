@@ -3,28 +3,28 @@ runningLogo.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-frame1
+frame10
   rotate: false
   xy: 1, 727
   size: 206, 240
   orig: 206, 240
   offset: 0, 0
   index: -1
-frame10
+frame11
   rotate: false
   xy: 1, 485
   size: 206, 240
   orig: 206, 240
   offset: 0, 0
   index: -1
-frame11
+frame12
   rotate: false
   xy: 209, 727
   size: 206, 240
   orig: 206, 240
   offset: 0, 0
   index: -1
-frame12
+frame13
   rotate: false
   xy: 1, 243
   size: 206, 240
