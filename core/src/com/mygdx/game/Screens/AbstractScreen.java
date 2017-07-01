@@ -24,7 +24,7 @@ import com.mygdx.game.GameAssets;
 public abstract class AbstractScreen implements Screen {
 
     protected ForgottenLife game;
-    protected GameAssets gameAssets;
+    public GameAssets gameAssets;
 
     protected Stage stage;
     private OrthographicCamera camera;

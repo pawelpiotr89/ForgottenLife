@@ -1,5 +1,6 @@
 package com.mygdx.game.Screens.SentencesScreens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.ForgottenLife;
@@ -17,7 +18,7 @@ public class LoadingIntro extends AbstractScreen {
 
     public LoadingIntro(ForgottenLife game) {
         super(game);
-
+        
         fontSizeIntroLoading = ForgottenLife.WIDTH / 20;
         parameter.size = fontSizeIntroLoading;
         progressBar = generator.generateFont(parameter);
@@ -34,6 +35,9 @@ public class LoadingIntro extends AbstractScreen {
             progressBar.setColor(new Color(Color.rgba8888(1, 1, 1, 1)));
             progressBar.draw(spriteBatch,"LOADING ASSETS... " +  gameAssets.getProgress() * 100 + " %", ForgottenLife.WIDTH / 4.5f, ForgottenLife.HEIGHT * 0.6f);
             spriteBatch.end();
+            if(gameAssets.getProgress() == 1){
+                goToIntro();
+            }
     }
 
     @Override
@@ -45,6 +49,6 @@ public class LoadingIntro extends AbstractScreen {
 
     public void goToIntro(){
         dispose();
-        game.setScreen(new IntroScreen(game));
+        game.setScreen(new IntroScreen(game, gameAssets));
     }
 }

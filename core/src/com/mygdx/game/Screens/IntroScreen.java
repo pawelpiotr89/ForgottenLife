@@ -5,11 +5,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.game.ForgottenLife;
+import com.mygdx.game.GameAssets;
 
 
 /**
@@ -36,7 +36,7 @@ public class IntroScreen extends AbstractScreen{
 
     private Animation runnerAnimation;
 
-    public IntroScreen(ForgottenLife game) {
+    public IntroScreen(ForgottenLife game, GameAssets gameAssets) {
         super(game);
         FADE_IN_TIME = 1f;
         SUBTITLE_FADE_DELAY = 0.5f;
