@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.ForgottenLife;
+import com.mygdx.game.GameAssets;
 import com.mygdx.game.Screens.OptionsScreen.OptionsScreen;
 import com.mygdx.game.Screens.SentencesScreens.PrologueSentence;
 
@@ -70,7 +71,7 @@ public class MenuScreen extends AbstractScreen {
     private int birdPositionX;
     private int birdPositionY;
 
-    MenuScreen(ForgottenLife game) {
+    MenuScreen(ForgottenLife game, GameAssets gameAssets) {
         super(game);
 
         birdAtlas = new TextureAtlas(Gdx.files.internal("menu/bird.pack"));

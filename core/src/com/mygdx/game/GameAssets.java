@@ -10,11 +10,18 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class GameAssets extends AssetManager{
 
+//////////////////////////////////////INTRO/////////////////////////////////////////////////////////
+
     public String runningLogoPath = "intro/runningLogo.pack";
     public String logoPath = "intro/logo.png";
 
     public void loadingIntroAssets(){
         this.load(runningLogoPath, TextureAtlas.class);
         this.load(logoPath, Texture.class);
+    }
+
+    public void unloadAssets(){
+        this.clear();
+        this.dispose();
     }
 }

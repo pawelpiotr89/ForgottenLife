@@ -29,6 +29,7 @@ public class IntroScreen extends AbstractScreen{
     private boolean animationAction;
     private float passingTime;
     private float period;
+    private float timeBeforeStart;
 
     private TextureAtlas runningLogo;
 
@@ -49,34 +50,37 @@ public class IntroScreen extends AbstractScreen{
         positionY = 580;
         animationAction = true;
         passingTime = 0f;
-        period = 25f;
+        period = 26f;
+        timeBeforeStart = 1.75f;
 
         runningLogo = gameAssets.get(gameAssets.runningLogoPath, TextureAtlas.class);
         logo = gameAssets.get(gameAssets.logoPath, Texture.class);
         runnerAnimation = new Animation(0.1f, runningLogo.getRegions());
-
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
 
-            spriteBatch.begin();
+        elapsedTime += Gdx.graphics.getDeltaTime();
 
-            if(animationAction == true){
-                spriteBatch.draw((TextureRegion) runnerAnimation.getKeyFrame(elapsedTime, animationAction), positionX, positionY);
+            if(elapsedTime > timeBeforeStart) {
+                spriteBatch.begin();
+
+                if (animationAction == true) {
+                    spriteBatch.draw((TextureRegion) runnerAnimation.getKeyFrame(elapsedTime, animationAction), positionX, positionY);
+                }
+
+                drawingText();
+                drawingLogo();
+                spriteBatch.end();
+
+                goToMenuScreen();
+                movingRunner();
+
+                fadeElapsed += delta / delay;
+                calculatingTime();
             }
-
-            drawingText();
-            drawingLogo();
-            spriteBatch.end();
-
-            goToMenuScreen();
-            movingRunner();
-
-            fadeElapsed += delta / delay;
-            elapsedTime += Gdx.graphics.getDeltaTime();
-            calculatingTime();
     }
 
     @Override
@@ -135,7 +139,7 @@ public class IntroScreen extends AbstractScreen{
             animationAction = false;
             if(passingTime > period) {
                 dispose();
-                game.setScreen(new MenuScreen(game));
+                game.setScreen(new MenuScreen(game, gameAssets));
             }
         }
     }

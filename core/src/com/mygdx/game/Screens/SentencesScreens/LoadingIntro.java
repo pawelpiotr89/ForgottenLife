@@ -15,10 +15,14 @@ public class LoadingIntro extends AbstractScreen {
 
     private BitmapFont progressBar;
     private int fontSizeIntroLoading;
+    private float elapsedTime;
+    private float timeBeforeIntro;
 
     public LoadingIntro(ForgottenLife game) {
         super(game);
-        
+
+        timeBeforeIntro = 1.75f;
+
         fontSizeIntroLoading = ForgottenLife.WIDTH / 20;
         parameter.size = fontSizeIntroLoading;
         progressBar = generator.generateFont(parameter);
@@ -36,6 +40,7 @@ public class LoadingIntro extends AbstractScreen {
             progressBar.draw(spriteBatch,"LOADING ASSETS... " +  gameAssets.getProgress() * 100 + " %", ForgottenLife.WIDTH / 4.5f, ForgottenLife.HEIGHT * 0.6f);
             spriteBatch.end();
             if(gameAssets.getProgress() == 1){
+                elapsedTime += Gdx.graphics.getDeltaTime();
                 goToIntro();
             }
     }
@@ -44,11 +49,12 @@ public class LoadingIntro extends AbstractScreen {
     public void dispose(){
         super.dispose();
         progressBar.dispose();
-
     }
 
     public void goToIntro(){
-        dispose();
-        game.setScreen(new IntroScreen(game, gameAssets));
+        if (elapsedTime > timeBeforeIntro) {
+            dispose();
+            game.setScreen(new IntroScreen(game, gameAssets));
+        }
     }
 }
