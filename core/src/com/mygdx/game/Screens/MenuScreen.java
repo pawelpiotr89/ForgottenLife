@@ -55,6 +55,13 @@ public class MenuScreen extends AbstractScreen {
 
     private Music rainSound;
 
+    private String firstCloudIndex = "cloud1";
+    private String secondCloudIndex = "cloud2";
+    private String thirdCloudIndex = "cloud6";
+    private String fourthCloudIndex = "cloud4";
+    private String fifthCloudIndex = "cloud3";
+    private String sixthCloudIndex = "cloud5";
+
     private long timeOfLastDrop;
     private int xWidth;
     private int yHight;
@@ -62,7 +69,6 @@ public class MenuScreen extends AbstractScreen {
     private boolean birdAction = true;
     private int birdPositionX;
     private int birdPositionY;
-    private float showMenuTime;
 
     MenuScreen(ForgottenLife game) {
         super(game);
@@ -95,22 +101,12 @@ public class MenuScreen extends AbstractScreen {
 
         xWidth = 560;
         yHight = 350;
-        showMenuTime = 4f;
 
         birdPositionX = MathUtils.random(50, 1870);
         birdPositionY = MathUtils.random(630, 810);
 
-        settingButtons();
-        createStartButton();
-        createOptionsButton();
-        createExitButton();
-
-        makingFirstCloud();
-        makingSecondCloud();
-        makingThirdCloud();
-        makingFourthCloud();
-        makingFifthCloud();
-        makingSixthCloud();
+        addingAllButtons();
+        makingAllClouds();
 
         rainSound.setLooping(true);
         rainSound.setVolume(0f);
@@ -120,48 +116,48 @@ public class MenuScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-        if(elapsedTime > showMenuTime) {
+
             spriteBatch.begin();
             spriteBatch.draw(menuBackground, 0, 0);
             spriteBatch.draw((Texture) waveAnimation.getKeyFrame(elapsedTime, true), 0, 0);
             spriteBatch.draw((TextureRegion) birdAnimation.getKeyFrame(elapsedTime, birdAction), birdPositionX, birdPositionY);
             drawingAllDrops();
-            makingAllClouds();
+            drawingAllClouds();
             spriteBatch.end();
 
             stage.act();
             stage.draw();
 
-            makingRain();
-            makingRainBackground();
-            makingRainFarBackground();
-            removingDrops();
-            removingDropsBackground();
-            removingDropsFarBackground();
-            movingFirstCloud();
-            movingSecondCloud();
-            movingThirdCloud();
-            movingFourthCloud();
-            movingFifthCloud();
-            movingSixthCloud();
+            makingAllRain();
+            removingAllDrops();
+            movingAllClouds();
 
             rainSound.setVolume(0.3f);
-        }
 
-        elapsedTime += Gdx.graphics.getDeltaTime();
+            elapsedTime += Gdx.graphics.getDeltaTime();
     }
 
     @Override
     public void dispose() {
         super.dispose();
+
         birdAtlas.dispose();
         cloudDropAtlas.dispose();
+
         menuBackground.dispose();
         waveBackground1.dispose();
         waveBackground2.dispose();
         waveBackground3.dispose();
         waveBackground4.dispose();
+
         rainSound.dispose();
+    }
+
+    private void addingAllButtons(){
+        settingButtons();
+        createStartButton();
+        createOptionsButton();
+        createExitButton();
     }
 
     private void drawingAllDrops(){
@@ -170,13 +166,43 @@ public class MenuScreen extends AbstractScreen {
         drawingDropsFarBackground();
     }
 
+    private void drawingAllClouds(){
+        drawingCloud(firstCloud, firstCloudIndex);
+        drawingCloud(secondCloud, secondCloudIndex);
+        drawingCloud(sixthCloud, sixthCloudIndex);
+        drawingCloud(fourthCloud, fourthCloudIndex);
+        drawingCloud(fifthCloud, fifthCloudIndex);
+        drawingCloud(thirdCloud, thirdCloudIndex);
+    }
+
+    private void removingAllDrops() {
+        removingDrops();
+        removingDropsBackground();
+        removingDropsFarBackground();
+    }
+
+    private void makingAllRain(){
+        makingRain();
+        makingRainBackground();
+        makingRainFarBackground();
+    }
+
+    private void movingAllClouds(){
+        movingCloud(firstCloud);
+        movingCloud(secondCloud);
+        movingCloud(thirdCloud);
+        movingCloud(fourthCloud);
+        movingCloud(fifthCloud);
+        movingCloud(sixthCloud);
+    }
+
     private void makingAllClouds(){
-        drawingFirstCloud();
-        drawingFifthCloud();
-        drawingThirdCloud();
-        drawingSixthCloud();
-        drawingSecondCloud();
-        drawingFourthCloud();
+        makingFirstCloud();
+        makingSecondCloud();
+        makingThirdCloud();
+        makingFourthCloud();
+        makingFifthCloud();
+        makingSixthCloud();
     }
 
     private void makingFirstCloud() {
@@ -221,82 +247,16 @@ public class MenuScreen extends AbstractScreen {
         sixthCloud.height = yHight;
     }
 
-    private void drawingFirstCloud() {
-        spriteBatch.draw(cloudDropAtlas.findRegion("cloud1"), firstCloud.x, firstCloud.y, xWidth, yHight);
-
+    private void drawingCloud(Rectangle cloud, String cloudIndex) {
+        spriteBatch.draw(cloudDropAtlas.findRegion(cloudIndex), cloud.x, cloud.y, xWidth, yHight);
     }
 
-    private void drawingSecondCloud() {
-        spriteBatch.draw(cloudDropAtlas.findRegion("cloud2"), secondCloud.x, secondCloud.y, xWidth, yHight);
-    }
-
-    private void drawingThirdCloud() {
-        spriteBatch.draw(cloudDropAtlas.findRegion("cloud6"), thirdCloud.x, thirdCloud.y, xWidth, yHight);
-    }
-
-    private void drawingFourthCloud() {
-        spriteBatch.draw(cloudDropAtlas.findRegion("cloud4"), fourthCloud.x, fourthCloud.y, xWidth, yHight);
-    }
-
-    private void drawingFifthCloud() {
-        spriteBatch.draw(cloudDropAtlas.findRegion("cloud5"), fifthCloud.x, fifthCloud.y, xWidth, yHight);
-    }
-
-    private void drawingSixthCloud() {
-        spriteBatch.draw(cloudDropAtlas.findRegion("cloud3"), sixthCloud.x, sixthCloud.y, xWidth, yHight);
-    }
-
-    private void movingFirstCloud() {
-        if (firstCloud.x < 1920) {
-            firstCloud.x += 16 * Gdx.graphics.getDeltaTime();
+    private void movingCloud(Rectangle cloud) {
+        if (cloud.x < 1920) {
+            cloud.x += 16 * Gdx.graphics.getDeltaTime();
         }
-        if (firstCloud.x > 1920) {
-            firstCloud.x = -550;
-        }
-    }
-
-    private void movingSecondCloud() {
-        if (secondCloud.x < 1920) {
-            secondCloud.x += 16 * Gdx.graphics.getDeltaTime();
-        }
-        if (secondCloud.x > 1920) {
-            secondCloud.x = -550;
-        }
-    }
-
-    private void movingThirdCloud() {
-        if (thirdCloud.x < 1920) {
-            thirdCloud.x += 16 * Gdx.graphics.getDeltaTime();
-        }
-        if (thirdCloud.x > 1920) {
-            thirdCloud.x = -550;
-        }
-    }
-
-    private void movingFourthCloud() {
-        if (fourthCloud.x < 1920) {
-            fourthCloud.x += 16 * Gdx.graphics.getDeltaTime();
-        }
-        if (fourthCloud.x > 1920) {
-            fourthCloud.x = -550;
-        }
-    }
-
-    private void movingFifthCloud() {
-        if (fifthCloud.x < 1920) {
-            fifthCloud.x += 16 * Gdx.graphics.getDeltaTime();
-        }
-        if (fifthCloud.x > 1920) {
-            fifthCloud.x = -550;
-        }
-    }
-
-    private void movingSixthCloud() {
-        if (sixthCloud.x < 1920) {
-            sixthCloud.x += 16 * Gdx.graphics.getDeltaTime();
-        }
-        if (sixthCloud.x > 1920) {
-            sixthCloud.x = -550;
+        if (cloud.x > 1920) {
+            cloud.x = -550;
         }
     }
 
@@ -350,13 +310,13 @@ public class MenuScreen extends AbstractScreen {
 
     private void drawingDropsBackground() {
         for (Rectangle dropp2 : dropsBackground) {
-            spriteBatch.draw(cloudDropAtlas.findRegion("drop2"), dropp2.x, dropp2.y);
+            spriteBatch.draw(cloudDropAtlas.findRegion("drop3"), dropp2.x, dropp2.y);
         }
     }
 
     private void drawingDropsFarBackground() {
         for (Rectangle dropp3 : dropsFarBackground) {
-            spriteBatch.draw(cloudDropAtlas.findRegion("drop3"), dropp3.x, dropp3.y);
+            spriteBatch.draw(cloudDropAtlas.findRegion("drop2"), dropp3.x, dropp3.y);
         }
     }
 
@@ -418,6 +378,8 @@ public class MenuScreen extends AbstractScreen {
         optionsButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                rainSound.stop();
+                dispose();
                 game.setScreen(new OptionsScreen(game));
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -432,6 +394,7 @@ public class MenuScreen extends AbstractScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 rainSound.stop();
+                dispose();
                 Gdx.app.exit();
                 return super.touchDown(event, x, y, pointer, button);
             }

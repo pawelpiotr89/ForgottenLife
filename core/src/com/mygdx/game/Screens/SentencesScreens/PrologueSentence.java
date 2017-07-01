@@ -40,7 +40,6 @@ public class PrologueSentence extends AbstractScreen {
     private float fade1, fade2, fade3;
     private int switcher;
     private float elapsedTime;
-    private float startPrologueTime;
 
     public PrologueSentence(ForgottenLife game) {
         super(game);
@@ -59,7 +58,6 @@ public class PrologueSentence extends AbstractScreen {
         SUBTITLE_FADE_DELAY = 0.5f;
         MORE_SUBTITLE_FADE_DELAY = 1.2f;
         switcher = 1;
-        startPrologueTime = 6f;
 
         parameter.size = fontSizePrologue;
         wordArtPrologue = generator.generateFont(parameter);
@@ -76,7 +74,6 @@ public class PrologueSentence extends AbstractScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-        if(elapsedTime > startPrologueTime) {
             spriteBatch.begin();
             spriteBatch.draw(fallingLeafRegion, leafPositionX, leafPositionY, 64, 128, 64, 64, 1, 1, rotation);
             drawingPrologueName();
@@ -94,8 +91,8 @@ public class PrologueSentence extends AbstractScreen {
 
             stage.act();
             stage.draw();
-        }
-        elapsedTime += Gdx.graphics.getDeltaTime();
+
+            elapsedTime += Gdx.graphics.getDeltaTime();
     }
 
     @Override

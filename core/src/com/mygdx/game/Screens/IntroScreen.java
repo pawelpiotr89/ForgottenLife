@@ -26,7 +26,6 @@ public class IntroScreen extends AbstractScreen{
     private boolean animationAction;
     private float passingTime;
     private float period;
-    private float startIntro;
 
     private Texture frame1;
     private Texture frame2;
@@ -58,8 +57,7 @@ public class IntroScreen extends AbstractScreen{
         positionY = 580;
         animationAction = true;
         passingTime = 0f;
-        period = 24f;
-        startIntro = 4f;
+        period = 1f;
 
         frame1 = new Texture(Gdx.files.internal("frame1.png"));
         frame2 = new Texture(Gdx.files.internal("frame2.png"));
@@ -83,7 +81,6 @@ public class IntroScreen extends AbstractScreen{
     public void render(float delta) {
         super.render(delta);
 
-        if(passingTime > startIntro) {
             spriteBatch.begin();
             spriteBatch.draw((Texture) runnerAnimation.getKeyFrame(elapsedTime, animationAction), positionX, positionY);
             drawingText();
@@ -92,12 +89,10 @@ public class IntroScreen extends AbstractScreen{
 
             goToMenuScreen();
             movingRunner();
+            calculatingTime();
 
             fadeElapsed += delta / delay;
             elapsedTime += Gdx.graphics.getDeltaTime();
-        }
-
-            calculatingTime();
     }
 
     @Override
