@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.game.ForgottenLife;
 
@@ -27,18 +29,7 @@ public class IntroScreen extends AbstractScreen{
     private float passingTime;
     private float period;
 
-    private Texture frame1;
-    private Texture frame2;
-    private Texture frame3;
-    private Texture frame4;
-    private Texture frame5;
-    private Texture frame6;
-    private Texture frame7;
-    private Texture frame8;
-    private Texture frame9;
-    private Texture frame10;
-    private Texture frame11;
-    private Texture frame12;
+    private TextureAtlas runningLogo;
 
     private Texture logo;
 
@@ -59,22 +50,11 @@ public class IntroScreen extends AbstractScreen{
         passingTime = 0f;
         period = 1f;
 
-        frame1 = new Texture(Gdx.files.internal("frame1.png"));
-        frame2 = new Texture(Gdx.files.internal("frame2.png"));
-        frame3 = new Texture(Gdx.files.internal("frame3.png"));
-        frame4 = new Texture(Gdx.files.internal("frame4.png"));
-        frame5 = new Texture(Gdx.files.internal("frame5.png"));
-        frame6 = new Texture(Gdx.files.internal("frame6.png"));
-        frame7 = new Texture(Gdx.files.internal("frame7.png"));
-        frame8 = new Texture(Gdx.files.internal("frame8.png"));
-        frame9 = new Texture(Gdx.files.internal("frame9.png"));
-        frame10 = new Texture(Gdx.files.internal("frame10.png"));
-        frame11 = new Texture(Gdx.files.internal("frame11.png"));
-        frame12 = new Texture(Gdx.files.internal("frame12.png"));
+        runningLogo = new TextureAtlas(Gdx.files.internal("intro/runningLogo.pack"));
 
-        logo = new Texture(Gdx.files.internal("logo.png"));
+        logo = new Texture(Gdx.files.internal("intro/logo.png"));
 
-        runnerAnimation = new Animation(0.1f, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, frame10, frame11, frame12, frame1);
+        runnerAnimation = new Animation(0.1f, runningLogo.getRegions());
     }
 
     @Override
@@ -82,7 +62,7 @@ public class IntroScreen extends AbstractScreen{
         super.render(delta);
 
             spriteBatch.begin();
-            spriteBatch.draw((Texture) runnerAnimation.getKeyFrame(elapsedTime, animationAction), positionX, positionY);
+            spriteBatch.draw((TextureRegion) runnerAnimation.getKeyFrame(elapsedTime, animationAction), positionX, positionY);
             drawingText();
             drawingLogo();
             spriteBatch.end();
@@ -99,18 +79,8 @@ public class IntroScreen extends AbstractScreen{
     public void dispose(){
         super.dispose();
         wordArtIntro.dispose();
-        frame1.dispose();
-        frame2.dispose();
-        frame3.dispose();
-        frame4.dispose();
-        frame5.dispose();
-        frame6.dispose();
-        frame7.dispose();
-        frame8.dispose();
-        frame9.dispose();
-        frame10.dispose();
-        frame11.dispose();
-        frame12.dispose();
+        runningLogo.dispose();
+        logo.dispose();
     }
 
     private void drawingText() {

@@ -73,20 +73,20 @@ public class MenuScreen extends AbstractScreen {
     MenuScreen(ForgottenLife game) {
         super(game);
 
-        birdAtlas = new TextureAtlas(Gdx.files.internal("bird.pack"));
-        cloudDropAtlas = new TextureAtlas(Gdx.files.internal("cloudsDrops.pack"));
+        birdAtlas = new TextureAtlas(Gdx.files.internal("menu/bird.pack"));
+        cloudDropAtlas = new TextureAtlas(Gdx.files.internal("menu/cloudsDrops.pack"));
 
-        menuBackground = new Texture(Gdx.files.internal("menuBackground.png"));
-        waveBackground1 = new Texture(Gdx.files.internal("waveBackground1.png"));
-        waveBackground2 = new Texture(Gdx.files.internal("waveBackground2.png"));
-        waveBackground3 = new Texture(Gdx.files.internal("waveBackground3.png"));
-        waveBackground4 = new Texture(Gdx.files.internal("waveBackground4.png"));
+        menuBackground = new Texture(Gdx.files.internal("menu/menuBackground.png"));
+        waveBackground1 = new Texture(Gdx.files.internal("menu/waveBackground1.png"));
+        waveBackground2 = new Texture(Gdx.files.internal("menu/waveBackground2.png"));
+        waveBackground3 = new Texture(Gdx.files.internal("menu/waveBackground3.png"));
+        waveBackground4 = new Texture(Gdx.files.internal("menu/waveBackground4.png"));
 
 
         waveAnimation = new Animation(0.1f, waveBackground1, waveBackground2, waveBackground3, waveBackground4);
         birdAnimation = new Animation(0.175f, birdAtlas.getRegions());
 
-        rainSound = Gdx.audio.newMusic(Gdx.files.internal("menuRain.mp3"));
+        rainSound = Gdx.audio.newMusic(Gdx.files.internal("menu/menuRain.mp3"));
 
         firstCloud = new Rectangle();
         secondCloud = new Rectangle();

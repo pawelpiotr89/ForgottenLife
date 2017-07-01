@@ -53,7 +53,7 @@ public abstract class AbstractScreen implements Screen {
         spriteBatch = new SpriteBatch();
         Gdx.input.setInputProcessor(stage);
 
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("FontC.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("game/FontC.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
         createBasicSkin();
