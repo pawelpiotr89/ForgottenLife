@@ -24,7 +24,7 @@ import com.mygdx.game.GameAssets;
 public abstract class AbstractScreen implements Screen {
 
     protected ForgottenLife game;
-    public GameAssets gameAssets;
+    protected GameAssets gameAssets;
 
     protected Stage stage;
     private OrthographicCamera camera;
@@ -48,14 +48,13 @@ public abstract class AbstractScreen implements Screen {
     protected int buttonVerticalPosition;
     protected int buttonFontSize;
 
-    public AbstractScreen(ForgottenLife game){
+    public AbstractScreen(ForgottenLife game, GameAssets gameAssets){
         this.game = game;
+        this.gameAssets = gameAssets;
         createCamera();
         stage = new Stage(new StretchViewport(ForgottenLife.WIDTH, ForgottenLife.HEIGHT, camera));
         spriteBatch = new SpriteBatch();
         Gdx.input.setInputProcessor(stage);
-
-        gameAssets = new GameAssets();
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("game/FontC.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();

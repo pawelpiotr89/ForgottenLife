@@ -2,6 +2,7 @@ package com.mygdx.game.Screens.OptionsScreen;
 
 
 import com.mygdx.game.ForgottenLife;
+import com.mygdx.game.GameAssets;
 import com.mygdx.game.Screens.AbstractScreen;
 
 /**
@@ -10,8 +11,8 @@ import com.mygdx.game.Screens.AbstractScreen;
 
 public class OptionsScreen extends AbstractScreen {
 
-    public OptionsScreen(ForgottenLife game) {
-        super(game);
+    public OptionsScreen(ForgottenLife game, GameAssets gameAssets) {
+        super(game, gameAssets);
     }
 
 }

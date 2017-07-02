@@ -5,6 +5,8 @@ import com.mygdx.game.Screens.SentencesScreens.LoadingIntro;
 
 public class ForgottenLife extends Game {
 
+	GameAssets gameAssets;
+
 	public final static String GAME_NAME = "FORGOTTEN LIFE";
 
 	public final static int WIDTH = 1920;
@@ -15,7 +17,8 @@ public class ForgottenLife extends Game {
 
 	@Override
 	public void create () {
-		setScreen(new LoadingIntro(this));
+		gameAssets = new GameAssets();
+		setScreen(new LoadingIntro(this, gameAssets));
 	}
 
 	public boolean isPaused() {

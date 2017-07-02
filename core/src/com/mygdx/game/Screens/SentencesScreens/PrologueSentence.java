@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.ForgottenLife;
+import com.mygdx.game.GameAssets;
 import com.mygdx.game.Screens.AbstractScreen;
 
 /**
@@ -41,8 +42,8 @@ public class PrologueSentence extends AbstractScreen {
     private int switcher;
     private float elapsedTime;
 
-    public PrologueSentence(ForgottenLife game) {
-        super(game);
+    public PrologueSentence(ForgottenLife game, GameAssets gameAssets) {
+        super(game, gameAssets);
 
         fallingLeaf = new Texture(Gdx.files.internal("prologue/leaf.png"));
         fallingLeafRegion = new TextureRegion(fallingLeaf);

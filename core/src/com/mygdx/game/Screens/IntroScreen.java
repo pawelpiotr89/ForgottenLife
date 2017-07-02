@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.GameAssets;
+import com.mygdx.game.Screens.SentencesScreens.LoadingMenu;
 
 
 /**
@@ -38,7 +39,7 @@ public class IntroScreen extends AbstractScreen{
     private Animation runnerAnimation;
 
     public IntroScreen(ForgottenLife game, GameAssets gameAssets) {
-        super(game);
+        super(game, gameAssets);
         FADE_IN_TIME = 1f;
         SUBTITLE_FADE_DELAY = 0.5f;
         MORE_SUBTITLE_FADE_DELAY = 1.2f;
@@ -51,10 +52,10 @@ public class IntroScreen extends AbstractScreen{
         animationAction = true;
         passingTime = 0f;
         period = 26f;
-        timeBeforeStart = 1.75f;
+        timeBeforeStart = 3f;
 
-        runningLogo = gameAssets.get(gameAssets.runningLogoPath, TextureAtlas.class);
-        logo = gameAssets.get(gameAssets.logoPath, Texture.class);
+        runningLogo = this.gameAssets.get(this.gameAssets.runningLogoPath, TextureAtlas.class);
+        logo = this.gameAssets.get(this.gameAssets.logoPath, Texture.class);
         runnerAnimation = new Animation(0.1f, runningLogo.getRegions());
     }
 
@@ -138,8 +139,9 @@ public class IntroScreen extends AbstractScreen{
         if (fade3 >= 1){
             animationAction = false;
             if(passingTime > period) {
+                gameAssets.unloadAssets();
                 dispose();
-                game.setScreen(new MenuScreen(game, gameAssets));
+                game.setScreen(new LoadingMenu(game, gameAssets));
             }
         }
     }

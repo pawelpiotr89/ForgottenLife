@@ -70,24 +70,25 @@ public class MenuScreen extends AbstractScreen {
     private boolean birdAction = true;
     private int birdPositionX;
     private int birdPositionY;
+    private float timeBeforeStart;
 
-    MenuScreen(ForgottenLife game, GameAssets gameAssets) {
-        super(game);
+    public MenuScreen(ForgottenLife game, GameAssets gameAssets) {
+        super(game, gameAssets);
 
-        birdAtlas = new TextureAtlas(Gdx.files.internal("menu/bird.pack"));
-        cloudDropAtlas = new TextureAtlas(Gdx.files.internal("menu/cloudsDrops.pack"));
+        birdAtlas = gameAssets.get(gameAssets.birdMenu, TextureAtlas.class);
+        cloudDropAtlas = gameAssets.get(gameAssets.cloudAndDropMenuAtlas, TextureAtlas.class);
 
-        menuBackground = new Texture(Gdx.files.internal("menu/menuBackground.png"));
-        waveBackground1 = new Texture(Gdx.files.internal("menu/waveBackground1.png"));
-        waveBackground2 = new Texture(Gdx.files.internal("menu/waveBackground2.png"));
-        waveBackground3 = new Texture(Gdx.files.internal("menu/waveBackground3.png"));
-        waveBackground4 = new Texture(Gdx.files.internal("menu/waveBackground4.png"));
+        menuBackground = gameAssets.get(gameAssets.menuBackground, Texture.class);
+        waveBackground1 = gameAssets.get(gameAssets.dropWave1, Texture.class);
+        waveBackground2 = gameAssets.get(gameAssets.dropWave2, Texture.class);
+        waveBackground3 = gameAssets.get(gameAssets.dropWave3, Texture.class);
+        waveBackground4 = gameAssets.get(gameAssets.dropWave4, Texture.class);
 
 
         waveAnimation = new Animation(0.1f, waveBackground1, waveBackground2, waveBackground3, waveBackground4);
         birdAnimation = new Animation(0.175f, birdAtlas.getRegions());
 
-        rainSound = Gdx.audio.newMusic(Gdx.files.internal("menu/menuRain.mp3"));
+        rainSound = gameAssets.get(gameAssets.menuRainSound, Music.class);
 
         firstCloud = new Rectangle();
         secondCloud = new Rectangle();
@@ -102,6 +103,7 @@ public class MenuScreen extends AbstractScreen {
 
         xWidth = 560;
         yHight = 350;
+        timeBeforeStart = 2f;
 
         birdPositionX = MathUtils.random(50, 1870);
         birdPositionY = MathUtils.random(630, 810);
@@ -117,6 +119,10 @@ public class MenuScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+
+        elapsedTime += Gdx.graphics.getDeltaTime();
+
+        if(elapsedTime > timeBeforeStart) {
 
             spriteBatch.begin();
             spriteBatch.draw(menuBackground, 0, 0);
@@ -134,8 +140,7 @@ public class MenuScreen extends AbstractScreen {
             movingAllClouds();
 
             rainSound.setVolume(0.3f);
-
-            elapsedTime += Gdx.graphics.getDeltaTime();
+        }
     }
 
     @Override
@@ -365,8 +370,9 @@ public class MenuScreen extends AbstractScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 rainSound.stop();
+                gameAssets.unloadAssets();
                 dispose();
-                game.setScreen(new PrologueSentence(game));
+                game.setScreen(new PrologueSentence(game, gameAssets));
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
@@ -380,8 +386,9 @@ public class MenuScreen extends AbstractScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 rainSound.stop();
+                gameAssets.unloadAssets();
                 dispose();
-                game.setScreen(new OptionsScreen(game));
+                game.setScreen(new OptionsScreen(game, gameAssets));
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
@@ -395,6 +402,7 @@ public class MenuScreen extends AbstractScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 rainSound.stop();
+                gameAssets.unloadAssets();
                 dispose();
                 Gdx.app.exit();
                 return super.touchDown(event, x, y, pointer, button);
