@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.GameAssets;
 import com.mygdx.game.Screens.AbstractScreen;
-import com.mygdx.game.Screens.MenuScreen;
 
 /**
  * Created by Roxven89 on 02.07.2017.
