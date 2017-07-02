@@ -29,6 +29,8 @@ public class GameAssets extends AssetManager{
 
 ///////////////////////////////////PROLOGUE/////////////////////////////////////////////////////////
 
+    public String leaf = "prologue/leaf.png";
+
     public void loadingIntroAssets(){
         this.load(runningLogoPath, TextureAtlas.class);
         this.load(logoPath, Texture.class);
@@ -43,6 +45,10 @@ public class GameAssets extends AssetManager{
         this.load(dropWave3, Texture.class);
         this.load(dropWave4, Texture.class);
         this.load(menuRainSound, Music.class);
+    }
+
+    public void loadingPrologueAssets(){
+        this.load(leaf, Texture.class);
     }
 
     public void unloadAssets(){

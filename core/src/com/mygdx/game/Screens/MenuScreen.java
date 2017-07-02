@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.GameAssets;
 import com.mygdx.game.Screens.OptionsScreen.OptionsScreen;
+import com.mygdx.game.Screens.SentencesScreens.LoadingPrologue;
 import com.mygdx.game.Screens.SentencesScreens.PrologueSentence;
 
 import java.util.Iterator;
@@ -372,7 +373,7 @@ public class MenuScreen extends AbstractScreen {
                 rainSound.stop();
                 gameAssets.unloadAssets();
                 dispose();
-                game.setScreen(new PrologueSentence(game, gameAssets));
+                game.setScreen(new LoadingPrologue(game, gameAssets));
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
@@ -403,6 +404,7 @@ public class MenuScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 rainSound.stop();
                 gameAssets.unloadAssets();
+                gameAssets.dispose();
                 dispose();
                 Gdx.app.exit();
                 return super.touchDown(event, x, y, pointer, button);

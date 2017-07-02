@@ -12,22 +12,22 @@ import com.mygdx.game.Screens.MenuScreen;
  * Created by Roxven89 on 02.07.2017.
  */
 
-public class LoadingMenu extends AbstractScreen {
+public class LoadingPrologue extends AbstractScreen {
 
     private BitmapFont progressBar;
     private int fontSizeIntroLoading;
     private float elapsedTime;
-    private float timeBeforeMenu;
+    private float timeBeforePrologue;
 
-    public LoadingMenu(ForgottenLife game, GameAssets gameAssets) {
+    public LoadingPrologue(ForgottenLife game, GameAssets gameAssets) {
         super(game, gameAssets);
 
-        timeBeforeMenu = 2f;
+        timeBeforePrologue = 2f;
         fontSizeIntroLoading = ForgottenLife.WIDTH / 20;
         parameter.size = fontSizeIntroLoading;
         progressBar = generator.generateFont(parameter);
 
-        gameAssets.loadingMenuAssets();
+        gameAssets.loadingPrologueAssets();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class LoadingMenu extends AbstractScreen {
         spriteBatch.end();
         if(gameAssets.update()){
             elapsedTime += Gdx.graphics.getDeltaTime();
-            goToMenu();
+            goToPrologue();
         }
     }
 
@@ -53,10 +53,10 @@ public class LoadingMenu extends AbstractScreen {
         progressBar.dispose();
     }
 
-    public void goToMenu(){
-        if (elapsedTime > timeBeforeMenu) {
+    public void goToPrologue(){
+        if (elapsedTime > timeBeforePrologue) {
             dispose();
-            game.setScreen(new MenuScreen(game, gameAssets));
+            game.setScreen(new PrologueSentence(game, gameAssets));
         }
     }
 }

@@ -45,7 +45,7 @@ public class PrologueSentence extends AbstractScreen {
     public PrologueSentence(ForgottenLife game, GameAssets gameAssets) {
         super(game, gameAssets);
 
-        fallingLeaf = new Texture(Gdx.files.internal("prologue/leaf.png"));
+        fallingLeaf = gameAssets.get(gameAssets.leaf, Texture.class);
         fallingLeafRegion = new TextureRegion(fallingLeaf);
 
         fontSizePrologue = ForgottenLife.WIDTH / 10;
