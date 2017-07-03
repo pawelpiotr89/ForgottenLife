@@ -31,6 +31,8 @@ public class GameAssets extends AssetManager{
 
     public String leaf = "prologue/leaf.png";
 
+////////////////////////////////////EPISOD1/////////////////////////////////////////////////////////
+
     public void loadingIntroAssets(){
         this.load(runningLogoPath, TextureAtlas.class);
         this.load(logoPath, Texture.class);

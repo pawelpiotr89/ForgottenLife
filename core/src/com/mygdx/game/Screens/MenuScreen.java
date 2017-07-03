@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.GameAssets;
 import com.mygdx.game.Screens.OptionsScreen.OptionsScreen;
-import com.mygdx.game.Screens.SentencesScreens.LoadingPrologue;
+import com.mygdx.game.Screens.LoadingScreens.LoadingPrologue;
 
 import java.util.Iterator;
 

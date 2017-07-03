@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.GameAssets;
-import com.mygdx.game.Screens.SentencesScreens.LoadingMenu;
+import com.mygdx.game.Screens.LoadingScreens.LoadingMenu;
 
 
 /**

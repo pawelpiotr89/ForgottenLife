@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
-import com.mygdx.game.Screens.SentencesScreens.LoadingIntro;
+import com.mygdx.game.Screens.LoadingScreens.LoadingIntro;
 
 public class ForgottenLife extends Game {
 

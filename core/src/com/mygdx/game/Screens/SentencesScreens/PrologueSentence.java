@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.GameAssets;
 import com.mygdx.game.Screens.AbstractScreen;
+import com.mygdx.game.Screens.LoadingScreens.LoadingPrologue1Scene;
 
 /**
  * Created by Roxven89 on 31.05.2017.
@@ -148,6 +149,7 @@ public class PrologueSentence extends AbstractScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 gameAssets.unloadAssets();
+                game.setScreen(new LoadingPrologue1Scene(game, gameAssets));
                 return super.touchDown(event, x, y, pointer, button);
             }
         });

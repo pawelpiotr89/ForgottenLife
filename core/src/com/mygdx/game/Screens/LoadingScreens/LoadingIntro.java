@@ -1,4 +1,4 @@
-package com.mygdx.game.Screens.SentencesScreens;
+package com.mygdx.game.Screens.LoadingScreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

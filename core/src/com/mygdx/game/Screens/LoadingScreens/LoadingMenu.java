@@ -1,4 +1,4 @@
-package com.mygdx.game.Screens.SentencesScreens;
+package com.mygdx.game.Screens.LoadingScreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -6,27 +6,28 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.ForgottenLife;
 import com.mygdx.game.GameAssets;
 import com.mygdx.game.Screens.AbstractScreen;
+import com.mygdx.game.Screens.MenuScreen;
 
 /**
  * Created by Roxven89 on 02.07.2017.
  */
 
-public class LoadingPrologue extends AbstractScreen {
+public class LoadingMenu extends AbstractScreen {
 
     private BitmapFont progressBar;
     private int fontSizeIntroLoading;
     private float elapsedTime;
-    private float timeBeforePrologue;
+    private float timeBeforeMenu;
 
-    public LoadingPrologue(ForgottenLife game, GameAssets gameAssets) {
+    public LoadingMenu(ForgottenLife game, GameAssets gameAssets) {
         super(game, gameAssets);
 
-        timeBeforePrologue = 2f;
+        timeBeforeMenu = 2f;
         fontSizeIntroLoading = ForgottenLife.WIDTH / 20;
         parameter.size = fontSizeIntroLoading;
         progressBar = generator.generateFont(parameter);
 
-        gameAssets.loadingPrologueAssets();
+        gameAssets.loadingMenuAssets();
     }
 
     @Override
@@ -42,7 +43,7 @@ public class LoadingPrologue extends AbstractScreen {
         spriteBatch.end();
         if(gameAssets.update()){
             elapsedTime += Gdx.graphics.getDeltaTime();
-            goToPrologue();
+            goToMenu();
         }
     }
 
@@ -52,10 +53,10 @@ public class LoadingPrologue extends AbstractScreen {
         progressBar.dispose();
     }
 
-    public void goToPrologue(){
-        if (elapsedTime > timeBeforePrologue) {
+    public void goToMenu(){
+        if (elapsedTime > timeBeforeMenu) {
             dispose();
-            game.setScreen(new PrologueSentence(game, gameAssets));
+            game.setScreen(new MenuScreen(game, gameAssets));
         }
     }
 }
